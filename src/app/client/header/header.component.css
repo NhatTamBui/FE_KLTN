@@ -1,0 +1,64 @@
+.header-image {
+  background-size: cover;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-left: 55px;
+
+}
+.text a {
+  font-size: 30px;
+  margin: 15px;
+  color: #1B4F93;
+}
+
+.btn-outline-primary {
+  color: #1B4F93;
+  border: 1px solid ;
+
+}
+.btn-outline-primary:hover {
+  background-color: #1B4F93;
+  color: #ffff;
+}
+.btn-primary {
+  background-color: #1B4F93;
+  border: 1px solid var(--background-primary);
+
+}
+
+.form-control {
+  width: 580px;
+  padding: 8px;
+  justify-content: center;
+  border-radius: 20px ;
+}
+input[type="search"] {
+  border: 1px solid #1B4F93
+}
+input[type="search"]::placeholder{
+  color: #1B4F93
+}
+
+.button-container {
+  text-align: center;
+}
+.custom-btn {
+  margin: 10px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 15px;
+  box-shadow: rgba(92, 20, 20, 0.25) 4px 4px 6px 0, rgba(249, 238, 238, 0.25) -4px -4px 6px 0 ;
+}
+
+.header {
+  background-color: #ffff;
+  top: 0;
+  position: fixed;
+  width: 100%;
+}
+/*@media screen and (max-height: 500px){*/
+/*  header {*/
+/*    display: none;*/
+/*  }*/
+/*}*/
