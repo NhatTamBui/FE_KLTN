@@ -17,6 +17,11 @@ import {NzIconModule} from "ng-zorro-antd/icon";
 import {FormsModule} from "@angular/forms";
 import {NgxSpinnerModule} from "ngx-spinner";
 import { AddExamComponent } from './exam/add-exam/add-exam.component';
+import { AudioPlayerComponent } from './exam/audio-player/audio-player.component';
+import { EditExamComponent } from './exam/edit-exam/edit-exam.component';
+import { ExamDetailComponent } from './exam/exam-detail/exam-detail.component';
+import {NzButtonModule} from "ng-zorro-antd/button";
+import {TooltipModule} from "ngx-bootstrap/tooltip";
 
 @NgModule({
   declarations: [
@@ -30,7 +35,10 @@ import { AddExamComponent } from './exam/add-exam/add-exam.component';
     PageHeaderComponent,
     AddTopicComponent,
     UsersComponent,
-    AddExamComponent
+    AddExamComponent,
+    AudioPlayerComponent,
+    EditExamComponent,
+    ExamDetailComponent
   ],
   imports: [
     CommonModule,
@@ -40,6 +48,8 @@ import { AddExamComponent } from './exam/add-exam/add-exam.component';
     NgOptimizedImage,
     FormsModule,
     NgxSpinnerModule,
+    NzButtonModule,
+    TooltipModule,
   ],
 })
 export class AdminModule {
