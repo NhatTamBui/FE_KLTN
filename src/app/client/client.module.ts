@@ -23,6 +23,12 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import {ListTestComponent} from './list-test/list-test.component';
 import {ProfileComponent} from './profile/profile.component';
 import {UpdateProfileComponent} from './profile/update-profile/update-profile.component';
+import {NzTagModule} from "ng-zorro-antd/tag";
+import {NzEmptyModule} from "ng-zorro-antd/empty";
+import {NzTabsModule} from "ng-zorro-antd/tabs";
+import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
+import {NzGridModule} from "ng-zorro-antd/grid";
+import {NzButtonModule} from "ng-zorro-antd/button";
 
 @NgModule({
   declarations: [
@@ -53,6 +59,12 @@ import {UpdateProfileComponent} from './profile/update-profile/update-profile.co
     ReactiveFormsModule,
     NzAvatarModule,
     NgxSpinnerModule,
+    NzTagModule,
+    NzEmptyModule,
+    NzTabsModule,
+    NzCheckboxModule,
+    NzGridModule,
+    NzButtonModule,
   ],
   providers: [],
   exports: [
