@@ -24,14 +24,10 @@ import {NzAvatarModule} from "ng-zorro-antd/avatar";
 import {NzImageModule} from "ng-zorro-antd/image";
 import {AuthServiceService} from "./auth-service.service";
 import {ClientGuardGuard} from "./client-guard.guard";
-import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider
-} from '@abacritt/angularx-social-login';
+import {SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider} from '@abacritt/angularx-social-login';
+import {FACEBOOK_APP_ID} from "./common/constant";
 
 registerLocaleData(en);
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +52,7 @@ registerLocaleData(en);
       positionClass: 'toast-bottom-right',
       closeButton: true,
     }),
-    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+    NgxSpinnerModule.forRoot({type: 'ball-scale-multiple'}),
     NzModalModule,
     NzAvatarModule,
     NzImageModule,
@@ -84,11 +80,10 @@ registerLocaleData(en);
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('826944865787994')
+            provider: new FacebookLoginProvider(FACEBOOK_APP_ID)
           }
         ],
         onError: (err) => {
-          console.error(err);
         }
       } as SocialAuthServiceConfig,
     }
