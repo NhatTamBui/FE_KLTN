@@ -2,40 +2,32 @@
   <div class="card">
     <div class="card-body">
       <h4 class="card-title" [innerText]="title"></h4>
-      <form nz-form>
-        <nz-form-item>
-          <nz-form-label [nzSpan]="5">Project Id</nz-form-label>
-          <nz-form-control nzHasFeedback [nzSpan]="10" >
-            <input nz-input class="border" [ngModel]="'Input Id'" name="projectId" />
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-          <nz-form-label [nzSpan]="5">Token key</nz-form-label>
-          <nz-form-control nzHasFeedback [nzSpan]="10" >
-            <input nz-input class="border" [ngModel]="'Input Token'" name="token"/>
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-          <nz-form-label [nzSpan]="5">Bucket Name</nz-form-label>
-          <nz-form-control nzHasFeedback [nzSpan]="10" >
-            <input nz-input class="border" [ngModel]="'Input Bucket'" name="bucket"/>
-          </nz-form-control>
-        </nz-form-item>
-
-        <nz-form-item>
-          <nz-form-label [nzSpan]="5">FileJson </nz-form-label>
-          <nz-form-control nzHasFeedback [nzSpan]="10">
-            <input nz-input class="border" [ngModel]="'Input Json'" name="json" />
-          </nz-form-control>
-        </nz-form-item>
-
-        <nz-form-item>
-          <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 16, offset: 8 }">
-            <button nz-button class="btn-add"> Thêm </button>
-          </nz-form-control>
-        </nz-form-item>
-
+      <form class="forms-sample">
+        <div class="form-group">
+          <label for="exampleInputName1">Tên Template</label>
+          <input type="text" class="form-control" id="exampleInputName12" name="name"
+                 placeholder="Nhập tên Template" [(ngModel)]="this.params.name">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputName1">Subject</label>
+          <input type="text" class="form-control" id="exampleInputName1" name="subject"
+                 placeholder="Nhập Subject" [(ngModel)]="this.params.subject">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputName1">Tempalte Code</label>
+          <input type="text" class="form-control" id="exampleInputNamer1" name="code"
+                 placeholder="Nhập Template Code" [(ngModel)]="this.params.templateCode">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputName1">Template Context</label>
+          <editor apiKey="01d1ysvvu8ltpjkbz1sn01lv6t5mu5wz0x6duazjsk6n6r66"
+                  [(ngModel)]="params.templateContent"
+                  [init]="tinymceConfig"
+          ></editor>
+        </div>
       </form>
+      <button class="btn btn-gradient-primary-2" (click)="doAction()" >{{ isAdd? 'Thêm' : 'Sửa' }}</button>
+      <button class="btn btn-secondary ms-2"[ngClass]="{'d-none' : isAdd}" (click)="close()">Hủy</button>
     </div>
   </div>
 </div>

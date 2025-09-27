@@ -13276,7 +13276,7 @@ code {
       background: initial; }
     .dropdown .dropdown-menu .dropdown-item:hover {
       background-color: #f8f9fa;
-      color: #ffffff; }
+      color: #631738; }
 
 /* Forms */
 .form-group {
@@ -13617,10 +13617,10 @@ dl {
   .table th,
   .table td {
     vertical-align: middle;
-    font-size: 0.875rem;
+    font-size: 1rem;
     line-height: 1;
     white-space: nowrap;
-    padding: 0.9375rem; }
+    padding: 1.25rem; }
     .table th img,
     .table td img {
       width: 36px;
