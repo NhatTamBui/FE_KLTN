@@ -1,35 +1,27 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output
-} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ToastrService} from "ngx-toastr";
 import {NgxSpinnerService} from "ngx-spinner";
 import {BsModalRef} from "ngx-bootstrap/modal";
 import {TranslateService} from "@ngx-translate/core";
-import {finalize} from "rxjs";
-import {AdminLibBaseCss3, AdminStyle2} from "../../admin.style";
 
 @Component({
-  selector: 'app-update-slider',
-  templateUrl: './update-slider.component.html',
-  styleUrls: ['./update-slider.component.scss',...AdminLibBaseCss3, ...AdminStyle2]
+  selector: 'app-update-topic',
+  templateUrl: './update-topic.component.html',
+  styleUrls: ['./update-topic.component.scss']
 })
-export class UpdateSliderComponent implements OnInit {
-
-  @Input() title: string = "Cập nhật Slider: ";
-  @Output() added = new EventEmitter();
-  @Output() addSuccessEmit = new EventEmitter();
-  @Input() isAdd = true;
-  @Input() idSlider: number = 0;
+export class UpdateTopicComponent {
+  @Input() title: string = "Cập nhật Topic: ";
   @Input() isShowImage: boolean = false;
   @Input() imageSrc: string | undefined = "";
   @Input() isPopup: boolean = false;
+  @Output() modified = new EventEmitter();
   formData = new FormData();
   showBorderError: boolean = false;
+  @Input() params = {
+    topicName: '',
+    topicId: ''
+  }
 
   constructor(private http: HttpClient,
               private toastr: ToastrService,
@@ -37,9 +29,6 @@ export class UpdateSliderComponent implements OnInit {
               private bsModalRef: BsModalRef,
               private translate: TranslateService,
   ) {
-  }
-
-  ngOnInit() {
   }
 
   handleFileInput(event: any) {
@@ -79,44 +68,24 @@ export class UpdateSliderComponent implements OnInit {
     const files = event.dataTransfer.files[0];
     this.handleFiles(files);
   }
-
-  addNew(): void {
-    if (!this.formData.has('file')) {
-      this.toastr.error('Vui lòng chọn ảnh');
-      return;
-    }
+  modifiTopic() {
     this.spinnerService.show();
-    const url = this.isAdd ? '/api/slider/add' : encodeURI(`/api/slider/update/${this.idSlider}`);
-    this.http.post<any>(url, this.formData)
-      .pipe(
-        finalize(() => {
-          if(this.isPopup) {
-            this.bsModalRef.hide();
-          }
-        })
-      )
+    this.formData.append('topicName', this.params.topicName);
+    this.http.patch(`/api/admin/topic/update/${this.params.topicId}`, this.formData)
       .subscribe({
         next: (res: any) => {
+          const msg = this.translate.instant(`TOPIC.${res?.message}`);
+          this.toastr.success(msg);
+          this.modified.emit();
           this.spinnerService.hide();
-          if (res?.success) {
-            const msg = this.translate.instant(`SLIDER.${res?.message}`);
-            this.toastr.success(msg);
-            this.added.emit();
-            this.addSuccessEmit.emit();
-            this.formData.delete('file');
-            this.imageSrc = '';
-            this.isShowImage = false;
-          } else {
-            const msg = this.translate.instant(`SLIDER.${res?.message}`);
-            this.toastr.success(msg);
+          if(this.isPopup){
+            this.close();
           }
         },
-        error: (error) => {
-          console.error('Lỗi:', error);
-          this.toastr.error('Đã xảy ra lỗi');
+        error: (res: any) => {
+          const msg = this.translate.instant(`TOPIC.${res?.message}`);
           this.spinnerService.hide();
         }
-      });
+      })
   }
-
 }

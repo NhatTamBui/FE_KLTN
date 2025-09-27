@@ -74,6 +74,12 @@ import { UpdateProfileComponent } from './profile/update-profile/update-profile.
 import { ChangePasswordComponent } from './profile/change-password/change-password.component';
 import { UpdateConfigCrawlComponent } from './crawl-data/crawl-config/update-config-crawl/update-config-crawl.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
+import { UpdateTopicComponent } from './topic/update-topic/update-topic.component';
+import {NzWaterMarkModule} from "ng-zorro-antd/water-mark";
+import { HistoryUploadFirebaseComponent } from './firebase/history-upload-firebase/history-upload-firebase.component';
+import { TranscriptDetailComponent } from './transcript/transcript-detail/transcript-detail.component';
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 
 @NgModule({
     declarations: [
@@ -127,7 +133,10 @@ import {NzSelectModule} from "ng-zorro-antd/select";
         ConfigTinyComponent,
         UpdateProfileComponent,
         ChangePasswordComponent,
-        UpdateConfigCrawlComponent
+        UpdateConfigCrawlComponent,
+        UpdateTopicComponent,
+        HistoryUploadFirebaseComponent,
+        TranscriptDetailComponent
     ],
   imports: [
     CommonModule,
@@ -156,7 +165,9 @@ import {NzSelectModule} from "ng-zorro-antd/select";
     PopoverModule,
     NzBadgeModule,
     NzSelectModule,
-
+    NzWaterMarkModule,
+    NzDatePickerModule,
+    BsDatepickerModule,
   ],
     exports: [
         PageHeaderComponent,
