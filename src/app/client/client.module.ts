@@ -17,7 +17,6 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {NavbarComponent} from './navbar/navbar.component';
 import {CarouselComponent} from './carousel/carousel.component';
 import {ServiceComponent} from './service/service.component';
-import {CarouselModule} from "ngx-owl-carousel-o";
 import {TopbarComponent} from './topbar/topbar.component';
 import {AboutComponent} from './about/about.component';
 import {TestComponent} from './test/test.component';
@@ -58,7 +57,6 @@ import {HistoryExamComponent} from './history-exam/history-exam.component';
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {HistoryExamDetailComponent} from './history-exam/history-exam-detail/history-exam-detail.component';
-import {GoogleSigninButtonModule} from "@abacritt/angularx-social-login";
 import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 import {PartTemplate1Component} from './test/part-template-1/part-template-1.component';
 import {PartTemplate2Component} from './test/part-template-2/part-template-2.component';
@@ -71,6 +69,8 @@ import {CommentComponent} from './comment/comment.component';
 import {NzProgressModule} from 'ng-zorro-antd/progress';
 import {ChatbotComponent} from './chatbot/chatbot.component';
 import {MarkdownComponent, MarkdownPipe} from 'ngx-markdown';
+import {ConnectionServiceModule} from 'ng-connection-service';
+import {CarouselModule} from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -105,47 +105,48 @@ import {MarkdownComponent, MarkdownPipe} from 'ngx-markdown';
     CommentComponent,
     ChatbotComponent
   ],
-  imports: [
-    NgbModule,
-    CommonModule,
-    ClientRoutingModule,
-    FormsModule,
-    FontAwesomeModule,
-    CarouselModule,
-    NgOptimizedImage,
-    ReactiveFormsModule,
-    NzAvatarModule,
-    NgxSpinnerModule,
-    NzTagModule,
-    NzEmptyModule,
-    NzTabsModule,
-    NzCheckboxModule,
-    NzGridModule,
-    NzButtonModule,
-    NzRadioModule,
-    NzImageModule,
-    NzDividerModule,
-    NzCardModule,
-    NzIconModule,
-    NzListModule,
-    NzTypographyModule,
-    NzFormModule,
-    NzDatePickerModule,
-    NzSelectModule,
-    NzInputNumberModule,
-    NzInputModule,
-    NzTimePickerModule,
-    TooltipModule,
-    NzCollapseModule,
-    NzTableModule,
-    GoogleSigninButtonModule,
-    NzToolTipModule,
-    NzPaginationModule,
-    NzCommentModule,
-    NzProgressModule,
-    MarkdownPipe,
-    MarkdownComponent
-  ],
+    imports: [
+        NgbModule,
+        CommonModule,
+        ClientRoutingModule,
+        FormsModule,
+        FontAwesomeModule,
+        CarouselModule,
+        NgOptimizedImage,
+        ReactiveFormsModule,
+        NzAvatarModule,
+        NgxSpinnerModule,
+        NzTagModule,
+        NzEmptyModule,
+        NzTabsModule,
+        NzCheckboxModule,
+        NzGridModule,
+        NzButtonModule,
+        NzRadioModule,
+        NzImageModule,
+        NzDividerModule,
+        NzCardModule,
+        NzIconModule,
+        NzListModule,
+        NzTypographyModule,
+        NzFormModule,
+        NzDatePickerModule,
+        NzSelectModule,
+        NzInputNumberModule,
+        NzInputModule,
+        NzTimePickerModule,
+        TooltipModule,
+        NzCollapseModule,
+        NzTableModule,
+        NzToolTipModule,
+        NzPaginationModule,
+        NzCommentModule,
+        NzProgressModule,
+        MarkdownPipe,
+        MarkdownComponent,
+        ConnectionServiceModule,
+        CarouselModule
+    ],
   providers: [],
   exports: [
     NavbarComponent,

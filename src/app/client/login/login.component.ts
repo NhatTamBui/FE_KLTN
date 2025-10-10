@@ -6,7 +6,6 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {OtpConfirmComponent} from './otp-confirm/otp-confirm.component';
 import {ToastrService} from 'ngx-toastr';
 import {NgxSpinnerService} from 'ngx-spinner';
-import {FacebookLoginProvider} from '@abacritt/angularx-social-login';
 import {finalize} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
@@ -14,7 +13,6 @@ import {ProfileService} from '../../common/profile.service';
 import {
   BASE_URL,
   BASE_URL_LOCAL,
-  CONSTANT
 } from '../../common/constant';
 
 @Component({
@@ -38,7 +36,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     captcha: ''
   };
   captchaImg: any;
-
 
 
   constructor(private formBuilder: FormBuilder,
