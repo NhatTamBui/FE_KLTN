@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ToastrService} from "ngx-toastr";
+import {CONSTANT} from '../../common/constant';
 
 @Component({
   selector: 'app-chatbot',
@@ -8,114 +9,195 @@ import {ToastrService} from "ngx-toastr";
   styleUrl: './chatbot.component.scss'
 })
 export class ChatbotComponent {
+  @ViewChild('chatContainer') private chatContainer!: ElementRef;
   isShow: boolean = true;
-  showText: boolean = true;
   isChatbot: boolean = true;
-  params: any ={
-    answer: '',
-    question: '',
-  };
-  chatEntries: any = [
-    {
-      question: 'Hi',
-      answer: 'Can i help u?'
-    },
-    {
-      question: 'You can help me?',
-      answer: 'Yes, i can help u'
-    },
-    {
-      question: `
-      The ------- at Yohanan Company organizes the delivery of supplies to all conference locations.
-      A. coordinating
-      B. coordinates
-      C. coordinated
-      D. coordinator
-      `,
-      answer: `
-      The ------- at Yohanan Company organizes the delivery of supplies to all conference locations.
-      A. coordinating
-      B. coordinates
-      C. coordinated
-      D. coordinator
-      `
-    },
-    {
-      question: `
-      The ------- at Yohanan Company organizes the delivery of supplies to all conference locations.
-      A. coordinating
-      B. coordinates
-      C. coordinated
-      D. coordinator
-      `,
-      answer: `
-      The ------- at Yohanan Company organizes the delivery of supplies to all conference locations.
-      A. coordinating
-      B. coordinates
-      C. coordinated
-      D. coordinator
-      `
-    },
-    {
-      question: `
-      The ------- at Yohanan Company organizes the delivery of supplies to all conference locations.
-      A. coordinating
-      B. coordinates
-      C. coordinated
-      D. coordinator
-      `,
-      answer: `
-      The ------- at Yohanan Company organizes the delivery of supplies to all conference locations.
-      A. coordinating
-      B. coordinates
-      C. coordinated
-      D. coordinator
-      `
-    },
-    {
-      question: `
-      The ------- at Yohanan Company organizes the delivery of supplies to all conference locations.
-      A. coordinating
-      B. coordinates
-      C. coordinated
-      D. coordinator
-      `,
-      answer: `
-      The ------- at Yohanan Company organizes the delivery of supplies to all conference locations.
-      A. coordinating
-      B. coordinates
-      C. coordinated
-      D. coordinator
-      `
-    }
-  ];
+  selectedModel: ModelAI = ModelAI.PALM2;
+  isLoading: boolean = false;
+  mappingModel: Map<ModelAI, () => void> = new Map<ModelAI, () => void>([
+    [ModelAI.CHAT_GPT, this.chatGPTChat.bind(this)],
+    [ModelAI.GEMINI, this.geminiChat.bind(this)],
+    [ModelAI.LLAMAS, this.llamasChat.bind(this)],
+    [ModelAI.PALM2, this.palm2Chat.bind(this)],
+  ]);
+
+  params: Params = new Params();
+  listChat: Chat[] = [];
+  listTranslate: Chat[] = [];
 
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
+    private cdr: ChangeDetectorRef
   ) {
+  }
+
+  chat() {
+    if (this.params.prompt.trim()) {
+      if (this.isChatbot) {
+        this.mappingModel.get(this.selectedModel)?.apply(this);
+      } else {
+        this.translate();
+      }
+    }
+  }
+
+  translate() {
+    this.isLoading = true;
+    this.http.post('api/translate', this.params.prompt)
+      .subscribe({
+        next: (res: any) => {
+          if (res?.success && res?.data) {
+            this.addTranslate(this.params.prompt, res?.data);
+          } else {
+            this.addTranslate(this.params.prompt, CONSTANT.error);
+          }
+          this.params.prompt = '';
+          this.isLoading = false;
+        },
+        error: _ => {
+          this.toastr.error(CONSTANT.error);
+          this.addTranslate(this.params.prompt, CONSTANT.error);
+          this.isLoading = false;
+        }
+      });
+  }
+
+  addTranslate(question: string, answer: string) {
+    this.listTranslate = [...this.listTranslate, new Chat(question, answer)];
+    this.cdr.detectChanges();
+    this.scrollToBottom();
+  }
+
+  chatGPTChat() {
+    this.payChat('api/gpt/ask');
+  }
+
+  geminiChat() {
+    this.payChat('api/vertex/gemini/ask');
+  }
+
+  palm2Chat() {
+    this.freeChat('api/vertex/palm2/ask');
+  }
+
+  llamasChat() {
+    this.freeChat('api/llm/ask');
+  }
+
+  payChat(url: string) {
+    this.isLoading = true;
+    this.http.post(url, this.params)
+      .subscribe({
+        next: (res: any) => {
+          if (res?.success) {
+            this.addMsg(this.params.prompt);
+            this.addMsg(res?.data, 'assistant');
+            this.addMessage(this.params.prompt, res?.data);
+          } else {
+            this.addMessage(this.params.prompt, CONSTANT.error);
+          }
+          this.isLoading = false;
+          this.params.prompt = '';
+        },
+        error: _ => {
+          this.toastr.error(CONSTANT.error);
+          this.addMessage(this.params.prompt, CONSTANT.error);
+          this.isLoading = false;
+        }
+      });
+  }
+
+  freeChat(url: string) {
+    this.isLoading = true;
+    this.http.post(url, {input: this.params.prompt})
+      .subscribe({
+        next: (res: any) => {
+          this.addMsg(this.params.prompt);
+          if (res?.success) {
+            this.addMessage(this.params.prompt, res?.data);
+            this.addMsg(res?.data, 'assistant');
+          } else {
+            this.addMessage(this.params.prompt, CONSTANT.error);
+            this.addMsg(CONSTANT.error, 'assistant');
+          }
+          this.params.prompt = '';
+          this.isLoading = false;
+        },
+        error: _ => {
+          this.addMsg(this.params.prompt);
+          this.addMsg(CONSTANT.error, 'assistant');
+          this.toastr.error(CONSTANT.error);
+          this.addMessage(this.params.prompt, CONSTANT.error);
+          this.isLoading = false;
+        }
+      });
+
   }
 
   toggleChatbot(): void {
     this.isShow = !this.isShow;
   }
-  postQuestion(){
-    const currentQuestion = this.params.question;
-    this.http.post(`/api/llm/ask`,{question: currentQuestion})
-      .subscribe({
-        next: (res: any) => {
-          if(res?.success) {
-            this.chatEntries = [...this.chatEntries, { question: currentQuestion, answer : res.data }];
-          } else {
-            this.chatEntries = [...this.chatEntries, { question: currentQuestion, answer : 'Đã có lỗi xảy ra. Vui lòng thử lại sau.' }];
-          }
-        },
-        error: (res: any) => {
-          this.toastr.error('error')
-          this.chatEntries = [...this.chatEntries, { question: currentQuestion, answer: 'Đã có lỗi xảy ra. Vui lòng thử lại sau.' }];
-        }
-      })
-    this.params.question = '';
-    this.showText = false;
+
+  addMessage(question: string, answer: string) {
+    this.listChat = [...this.listChat, new Chat(question, answer)];
+    this.cdr.detectChanges();
+    this.scrollToBottom();
   }
+
+  addMsg(content: string, role: string = 'user') {
+    this.params.listMsg = [...this.params.listMsg, new Msg(content, role)];
+  }
+
+  test() {
+    console.log(this.listChat)
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight + 200;
+    } catch (err) {
+      console.error('Scroll to bottom error:', err);
+    }
+  }
+
+  protected readonly ModelAI = ModelAI;
+}
+
+
+export class Chat {
+  question: string;
+  answer: string;
+
+  constructor(question: string = '', answer: string = '') {
+    this.question = question;
+    this.answer = answer;
+  }
+}
+
+export class Params {
+  listMsg: Msg[];
+  prompt: string;
+
+  constructor(listMsg: Msg[] = [], prompt: string = '') {
+    this.listMsg = listMsg;
+    this.prompt = prompt;
+  }
+}
+
+export class Msg {
+  text: string;
+  type: string;
+
+  constructor(text: string = '', type: string = 'user') {
+    this.text = text;
+    this.type = type;
+  }
+}
+
+export enum ModelAI {
+  CHAT_GPT = 'chat-gpt',
+  GEMINI = 'gemini',
+  LLAMAS = 'llamas',
+  PALM2 = 'palm2',
 }
