@@ -3,8 +3,10 @@ import {AdminLibBaseCss} from "./admin.style";
 import {HttpClient} from "@angular/common/http";
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {NgxSpinnerService} from "ngx-spinner";
-import {finalize} from "rxjs";
+import {distinctUntilChanged, finalize} from "rxjs";
 import {TranslateService} from '@ngx-translate/core';
+import {CONSTANT} from '../common/constant';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -17,10 +19,14 @@ import {TranslateService} from '@ngx-translate/core';
 export class AdminComponent implements OnInit {
   isShow: boolean = false;
   canActivate: boolean = false;
+  listMemberMenu: MenuGroup[] = [];
+  listSystemMenu: MenuGroup[] = [];
+  listMenuGroupBlank: number[] = [9];
 
   constructor(private http: HttpClient,
               private modal: NzModalService,
               private spinner: NgxSpinnerService,
+              private router: Router,
               private translate: TranslateService) {
     this.translate.setDefaultLang('en_US');
     this.translate.use('en_US');
@@ -42,6 +48,26 @@ export class AdminComponent implements OnInit {
             this.canActivate = false;
           } else {
             this.canActivate = true;
+            const memberMenu = JSON.parse(localStorage.getItem(CONSTANT.memberMenu) ?? '[]');
+            const systemMenu = JSON.parse(localStorage.getItem(CONSTANT.systemMenu) ?? '[]');
+
+            if (memberMenu.length > 0 && systemMenu.length > 0) {
+              this.listMemberMenu = [...memberMenu];
+              this.listSystemMenu = [...systemMenu];
+            } else {
+              this.http.get<MenuGroup[]>('api/left-menu/get')
+                .pipe(distinctUntilChanged())
+                .subscribe(data => {
+                  const memberMenu = data.filter(menu => menu.type === 'MEMBER');
+                  const systemMenu = data.filter(menu => menu.type === 'SYSTEM');
+
+                  this.listMemberMenu = [...memberMenu];
+                  this.listSystemMenu = [...systemMenu];
+
+                  localStorage.setItem(CONSTANT.memberMenu, JSON.stringify(memberMenu));
+                  localStorage.setItem(CONSTANT.systemMenu, JSON.stringify(systemMenu));
+                });
+            }
           }
         } else {
           this.showNotPermission();
@@ -76,4 +102,33 @@ export class AdminComponent implements OnInit {
       ]
     });
   }
+
+  expendMenu(menu: MenuGroup) {
+    menu.expanded = !menu.expanded;
+  }
+
+  openTab(path: string) {
+    this.router.navigateByUrl(path);
+  }
+}
+
+export interface MenuGroup {
+  menuGroupId: number;
+  path: string;
+  displayName: string;
+  roles: string;
+  icon: string;
+  priority: number;
+  haveChild: boolean;
+  type: string;
+  active: boolean;
+  expanded: boolean;
+  leftMenus: LeftMenuItem[];
+}
+
+export interface LeftMenuItem {
+  leftMenuId: number;
+  displayName: string;
+  path: string;
+  roles: string;
 }

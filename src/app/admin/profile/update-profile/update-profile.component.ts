@@ -1,10 +1,9 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {HttpClient} from '@angular/common/http';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {NgxSpinnerService} from 'ngx-spinner';
-import {AuthService} from '../../../auth.service';
 import {catchError, finalize, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {ProfileService} from '../../../common/profile.service';
@@ -14,7 +13,7 @@ import {ProfileService} from '../../../common/profile.service';
   templateUrl: './update-profile.component.html',
   styleUrls: ['./update-profile.component.scss']
 })
-export class UpdateProfileComponent implements OnInit{
+export class UpdateProfileComponent {
   profileForm!: FormGroup;
   avatarSrc: string = '';
   formData = new FormData();
@@ -25,7 +24,6 @@ export class UpdateProfileComponent implements OnInit{
               private http: HttpClient,
               private bsModalRef: BsModalRef,
               private spin: NgxSpinnerService,
-              private auth: AuthService,
               protected profileService: ProfileService) {
     this.profileForm = this.formBuilder.group({
       fullName: ['', Validators.required],
@@ -34,8 +32,6 @@ export class UpdateProfileComponent implements OnInit{
     });
   }
 
-  ngOnInit(): void {
-  }
   closeModal() {
     this.close.emit('ok');
     this.bsModalRef.hide();
