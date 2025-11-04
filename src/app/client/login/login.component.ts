@@ -187,8 +187,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.isNotValidInputLogin()) {
-      const msg = this.translate.instant(`USER.EMAIL_PASS_INVALID`);
-      this.toast.error(msg);
+      this.toast.error('Email hoặc Mật khẩu không hợp lệ');
       return;
     }
     this.spinnerService.show().then();
@@ -233,12 +232,11 @@ export class LoginComponent implements OnInit {
   }
 
   loginSocial(p: string) {
-    const mIsDevMode = isDevMode() || window.location.href.includes('localhost');
     // set directLink to cookie with 5 minutes
     if (this.isNotDirect) {
       document.cookie = `directLink=${this.directLink};max-age=300;path=/`;
     }
-    window.location.href = `${mIsDevMode ? BASE_URL_LOCAL : BASE_URL}/api/oauth2/authorize/${p}?redirect_uri=${window.location.origin}/oauth2/redirect`;
+    window.location.href = `${this.profileService.isDevelopmentMode ? BASE_URL_LOCAL : BASE_URL}/api/oauth2/authorize/${p}?redirect_uri=${window.location.origin}/oauth2/redirect`;
   }
 
   forgetPassword() {

@@ -82,7 +82,8 @@
     "CREATE_EXAM_SUCCESS": "Tạo đề thi thành công!",
     "UPDATE_EXAM_SUCCESS": "Cập nhật đề thi thành công!",
     "GET_EXAM_SUCCESS": "Đã tìm thấy đề thi!",
-    "EXAM_NAME_INVALID": "Tên đề thi không được để trống!"
+    "EXAM_NAME_INVALID": "Tên đề thi không được để trống!",
+    "DELETE_EXAM_SUCCESS": "Xóa đề thành công!"
   },
   "USER": {
     "ACCOUNT_NOT_ACTIVE": "Tài khoản chưa được kích hoạt!",
@@ -97,8 +98,13 @@
     "SEND_EMAIL_FAILED": "Gửi Email thất bại. Vui lòng thử lại sau!",
     "PASSWORD_NOT_MATCH": "Mật khẩu không trùng khớp!",
     "UPDATE_PROFILE_SUCCESS": "Cập nhật Profile thành công!",
-    "EMAIL_PASS_INVALID": "Email hoặc mật khẩu không được bỏ trống!",
-    "EMAIL_NOT_REGISTERED": "Tài khoản này chưa được đăng ký!"
+    "EMAIL_PASS_INVALID": "Email hoặc mật khẩu không hợp lệ!",
+    "EMAIL_NOT_REGISTERED": "Tài khoản này chưa được đăng ký!",
+    "CAPTCHA_INCORRECT": "CapCha không đúng, Vui lòng thử lại!",
+    "CONFIRM_OTP_SUCCESS": "Xác nhận OTP thành công!",
+    "OTP_EXPIRED": "OTP đã hết hạn!",
+    "NOT_FOUNT_USER": "Không tìm thấy người dùng",
+    "NOT_SUPPORTED": "Không hỗ trợ!"
   },
   "BLOG": {
     "CREATE_BLOG_SUCCESS" : "Tạo bài viết thành công",
@@ -136,7 +142,9 @@
   "FORGOT_PASSWORD": "Quên mật khẩu",
   "UPDATE_AVATAR": "Cập nhật ảnh đại diện",
   "UPDATE_PROFILE": "Cập nhật trang cá nhân",
-  "RESET_PASSWORD": "Đặt lại mật khẩu"
+  "RESET_PASSWORD": "Đặt lại mật khẩu",
+  "add": "Add",
+  "edit": "Edit"
 }
 
 

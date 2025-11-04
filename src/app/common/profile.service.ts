@@ -1,8 +1,9 @@
-import {inject, Injectable} from '@angular/core';
+import {inject, Injectable, isDevMode} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Profile} from './model/Profile';
 import {ResolveFn} from '@angular/router';
 import {Observable} from 'rxjs';
+import {CONSTANT} from './constant';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,13 @@ export class ProfileService {
   get getAvatar() {
     return this.currentUser.avatar;
   }
+  get getEmail() {
+    return this.currentUser.email;
+  }
+
+  get isDevelopmentMode() {
+    return isDevMode() || window.location.href.includes('172.19.200.219') || window.location.href.includes('localhost');
+  }
 
   public userIsLogin() {
     return this.isLogin;
@@ -35,6 +43,7 @@ export class ProfileService {
   setProfile(profile = new Profile()): void {
     this.currentUser = profile;
   }
+
   getProfileData(): Observable<Profile> {
     return new Observable<any>((subscriber: any) => {
       const sub = this.http.get('/api/user/get-profile').subscribe({
@@ -52,6 +61,9 @@ export class ProfileService {
             this.isLogin = false;
             localStorage.removeItem('token');
             localStorage.removeItem('tokenValid');
+            localStorage.removeItem(CONSTANT.systemMenu);
+            localStorage.removeItem(CONSTANT.memberMenu);
+            localStorage.removeItem(CONSTANT.formatAnswer);
             window.location.href = '/login';
           }
           subscriber.next(res.data);

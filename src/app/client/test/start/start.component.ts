@@ -14,7 +14,7 @@ import {
 } from 'ng-zorro-antd/modal';
 import {BsModalService} from 'ngx-bootstrap/modal';
 import {NgxSpinnerService} from 'ngx-spinner';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {
   finalize,
   Subscription,
@@ -69,6 +69,7 @@ export class StartComponent implements OnInit, OnDestroy, AfterViewInit {
               private spinnerService: NgxSpinnerService,
               private route: ActivatedRoute,
               private connectionService: ConnectionService,
+              private router: Router,
               protected profileService: ProfileService) {
 
   }
@@ -262,7 +263,7 @@ export class StartComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   finishTest() {
-    const isNotSelectAll = this.checkSelectedAll();
+    const isNotSelectAll = !this.checkSelectedAll();
     const isNotSubmit = this.totalTimeInSeconds > 0;
     if (isNotSelectAll && isNotSubmit) {
       const confirmModal: NzModalRef = this.modal.create({
@@ -308,7 +309,7 @@ export class StartComponent implements OnInit, OnDestroy, AfterViewInit {
               }
             });
           this.toast.success('Nộp bài thành công');
-          window.location.href = `/test/${this.currentExam?.examId}/result/${res?.data}`;
+          this.router.navigate([`/my-exam/detail/${res?.data}`]).then();
         } else {
           this.toast.error(res?.message);
         }

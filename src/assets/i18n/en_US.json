@@ -82,7 +82,8 @@
     "CREATE_EXAM_SUCCESS": "Created exam successfully!",
     "UPDATE_EXAM_SUCCESS": "Updated exam successfully!",
     "GET_EXAM_SUCCESS": "Exam found!",
-    "EXAM_NAME_INVALID": "Exam name cannot be empty!"
+    "EXAM_NAME_INVALID": "Exam name cannot be empty!",
+    "DELETE_EXAM_SUCCESS": "Delete Exam success!"
   },
   "USER": {
     "ACCOUNT_NOT_ACTIVE": "Account not activated!",
@@ -97,8 +98,13 @@
     "SEND_EMAIL_FAILED": "Failed to send Email. Please try again later!",
     "PASSWORD_NOT_MATCH": "Passwords do not match!",
     "UPDATE_PROFILE_SUCCESS": "Updated profile successfully!",
-    "EMAIL_PASS_INVALID": "Email or password cannot be empty!",
-    "EMAIL_NOT_REGISTERED": "This account has not been registered!"
+    "EMAIL_PASS_INVALID": "Email or password invalid!",
+    "EMAIL_NOT_REGISTERED": "This account has not been registered!",
+    "CAPTCHA_INCORRECT": "Incorect CapCha!",
+    "CONFIRM_OTP_SUCCESS": "Confirm OTP success!",
+    "OTP_EXPIRED": "OTP expired!",
+    "NOT_FOUNT_USER": "User Not Found",
+    "NOT_SUPPORTED": "Not Support!"
   },
   "BLOG": {
     "CREATE_BLOG_SUCCESS": "Created blog successfully",
@@ -136,5 +142,7 @@
   "FORGOT_PASSWORD": "Forgot Password",
   "UPDATE_AVATAR": "Update Avatar",
   "UPDATE_PROFILE": "Update Profile",
-  "RESET_PASSWORD": "Reset Password"
+  "RESET_PASSWORD": "Reset Password",
+  "add": "Add",
+  "edit": "Edit"
 }
