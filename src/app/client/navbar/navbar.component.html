@@ -1,69 +1,299 @@
-<nav class="navbar navbar-expand-lg bg-white navbar-light p-0 wow fadeIn" data-wow-delay="0.1s">
-  <a routerLink="/home" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-    <h1 class="m-0 text-primary d-flex align-items-center">
-      <img ngSrc="assets/images/logo_tachnen.png" width="60" height="60" alt="">
-      TOEICUTE
-    </h1>
+<nav class="navbar navbar-expand-lg navbar-light p-0 wow fadeIn shadow-sm" data-wow-delay="0.1s"
+     style="background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.05);">
+
+  <!-- Brand Logo với hiệu ứng hover -->
+  <a routerLink="/home" class="navbar-brand d-flex align-items-center px-4 px-lg-5 position-relative overflow-hidden"
+     style="transition: all 0.3s ease;">
+    <div class="brand-container d-flex align-items-center position-relative">
+      <div class="logo-wrapper me-2 position-relative"
+           style="border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,123,255,0.2); transition: transform 0.3s ease;">
+        <img ngSrc="assets/images/logo_new.jpg" width="60" height="60" alt="TOEICMASTER Logo"
+             style="border-radius: 15px; transition: transform 0.3s ease;">
+      </div>
+      <h1 class="m-0 d-flex align-items-center fw-bold position-relative"
+          style="background: linear-gradient(135deg, #007bff, #0056b3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 1.5rem; letter-spacing: -0.5px;">
+        TOEICMASTER
+        <div class="brand-underline position-absolute"
+             style="bottom: -2px; left: 0; width: 0; height: 2px; background: linear-gradient(135deg, #007bff, #0056b3); transition: width 0.3s ease;"></div>
+      </h1>
+    </div>
   </a>
-  <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+
+  <!-- Toggle Button với animation -->
+  <button type="button" class="navbar-toggler me-4 border-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+          style="background: rgba(0,123,255,0.1); border-radius: 12px; padding: 8px 12px; transition: all 0.3s ease;">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav ms-auto p-4 p-lg-0">
-      <li class="nav-item">
-        <a (click)="directLink('/home', 'home')" class="nav-link" [ngClass]="{'active': activeNav=='home'}">Trang
-          chủ</a>
-      </li>
 
-      <li class="nav-item">
-        <a (click)="directLink('/list-test', 'list-test')" class="nav-item nav-link"
-           [ngClass]="{'active': activeNav=='list-test'}">
-          Luyện thi
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <!-- Navigation Menu -->
+    <ul class="navbar-nav ms-auto p-4 p-lg-0 align-items-lg-center">
+
+      <!-- Trang chủ -->
+      <li class="nav-item position-relative mx-1">
+        <a (click)="directLink('/home', 'home')"
+           class="nav-link px-3 py-2 rounded-pill fw-medium position-relative overflow-hidden"
+           [ngClass]="{'active-nav': activeNav=='home' && !window.location.pathname.includes('test')}"
+           style="transition: all 0.3s ease; color: #495057;">
+          <span class="nav-text position-relative z-index-2">Trang chủ</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a (click)="directLink('/tests', 'tests')" class="nav-item nav-link"
-           [ngClass]="{'active': activeNav=='tests', 'd-none': !userVip}">Thi</a>
+
+      <!-- Luyện thi -->
+      <li class="nav-item position-relative mx-1">
+        <a (click)="directLink('/list-test', 'list-test')"
+           class="nav-link px-3 py-2 rounded-pill fw-medium position-relative overflow-hidden"
+           [ngClass]="{'active-nav': activeNav=='list-test' || window.location.pathname.includes('test')}"
+           style="transition: all 0.3s ease; color: #495057;">
+          <span class="nav-text position-relative z-index-2">Luyện thi</span>
+        </a>
       </li>
-      <li class="nav-item">
-        <a (click)="directLink('/my-exam', 'my-exam')" class="nav-item nav-link"
-           [ngClass]="{'active': activeNav=='my-exam'}">Kết
-          quả</a>
+
+      <!-- Thi -->
+      <li class="nav-item position-relative mx-1">
+        <a (click)="directLink('/tests', 'tests')"
+           class="nav-link px-3 py-2 rounded-pill fw-medium position-relative overflow-hidden"
+           [ngClass]="{'active-nav': activeNav=='tests', 'd-none': !userVip}"
+           style="transition: all 0.3s ease; color: #495057;">
+          <span class="nav-text position-relative z-index-2">Thi</span>
+          <span class="vip-badge position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                style="background: linear-gradient(135deg, #ffd700, #ffb300); color: #000; font-size: 0.6rem; padding: 2px 6px;">VIP</span>
+        </a>
       </li>
-      <li class="nav-item">
-        <a (click)="directLink('/blog', 'blog')" class="nav-item nav-link" [ngClass]="{'active': activeNav=='blog'}">Blog</a>
+
+      <!-- Kết quả -->
+      <li class="nav-item position-relative mx-1">
+        <a (click)="directLink('/my-exam', 'my-exam')"
+           class="nav-link px-3 py-2 rounded-pill fw-medium position-relative overflow-hidden"
+           [ngClass]="{'active-nav': activeNav.includes('my-exam')}"
+           style="transition: all 0.3s ease; color: #495057;">
+          <span class="nav-text position-relative z-index-2">Kết quả</span>
+        </a>
       </li>
-      <li class="nav-item">
-        <a (click)="directLink('/chat', 'chat')" class="nav-item nav-link" [ngClass]="{'active': activeNav=='chat'}">Room chat</a>
+
+      <!-- Blog -->
+      <li class="nav-item position-relative mx-1">
+        <a (click)="directLink('/blog', 'blog')"
+           class="nav-link px-3 py-2 rounded-pill fw-medium position-relative overflow-hidden"
+           [ngClass]="{'active-nav': activeNav=='blog'}"
+           style="transition: all 0.3s ease; color: #495057;">
+          <span class="nav-text position-relative z-index-2">Blog</span>
+        </a>
       </li>
-      <li class="nav-item">
-        <a (click)="directLink('/profile', '')" class="nav-item nav-link d-xl-none">Trang cá nhân</a>
+
+      <!-- Room chat (hidden) -->
+      <li class="nav-item position-relative mx-1">
+        <a (click)="directLink('/chat', 'chat')"
+           class="nav-link px-3 py-2 rounded-pill fw-medium position-relative overflow-hidden d-none"
+           [ngClass]="{'active-nav': activeNav=='chat'}"
+           style="transition: all 0.3s ease; color: #495057;">
+          <span class="nav-text position-relative z-index-2">Room chat</span>
+        </a>
       </li>
-      <li class="nav-item">
-        <a (click)="directLink('/pricing', 'pricing')" class="nav-item nav-link"
-           [ngClass]="{'active': activeNav=='pricing'}">Bảng
-          giá</a>
+
+      <!-- Trang cá nhân (mobile only) -->
+      <li class="nav-item position-relative mx-1">
+        <a (click)="directLink('/profile', '')"
+           class="nav-link px-3 py-2 rounded-pill fw-medium position-relative overflow-hidden d-xl-none"
+           style="transition: all 0.3s ease; color: #495057;">
+          <span class="nav-text position-relative z-index-2">Trang cá nhân</span>
+        </a>
       </li>
-      <li class="nav-item">
-        <a (click)="directLink('/about', '')" class="nav-item nav-link d-none">Liên hệ</a>
+
+      <!-- Bảng giá -->
+      <li class="nav-item position-relative mx-1">
+        <a (click)="directLink('/pricing', 'pricing')"
+           class="nav-link px-3 py-2 rounded-pill fw-medium position-relative overflow-hidden"
+           [ngClass]="{'active-nav': activeNav=='pricing'}"
+           style="transition: all 0.3s ease; color: #495057;">
+          <span class="nav-text position-relative z-index-2">Bảng giá</span>
+        </a>
       </li>
-      <li class="nav-item">
+
+      <!-- Liên hệ (hidden) -->
+      <li class="nav-item position-relative mx-1">
+        <a (click)="directLink('/about', '')"
+           class="nav-link px-3 py-2 rounded-pill fw-medium position-relative overflow-hidden d-none"
+           style="transition: all 0.3s ease; color: #495057;">
+          <span class="nav-text position-relative z-index-2">Liên hệ</span>
+        </a>
+      </li>
+
+      <!-- Đăng nhập Button -->
+      <li class="nav-item mx-2" [ngClass]="{'d-none': isLogin}">
         <a href="javascript:void(0)" (click)="openLogin()"
-           class="nav-item nav-link" [ngClass]="{'d-none': isLogin}">Đăng nhập</a>
+      class="btn btn-primary px-4 py-2 rounded-pill fw-medium shadow-sm position-relative overflow-hidden d-flex justify-content-center align-items-center"
+           style="background: linear-gradient(135deg, #007bff, #0056b3); border: none; transition: all 0.3s ease;">
+          <span class="position-relative z-index-2">Đăng nhập</span>
+        </a>
       </li>
     </ul>
-    <div class="nav-item dropdown" [ngClass]="{'d-none': !isLogin}">
-      <a href="javascript:void(0)" class="navbar-brand d-flex align-items-center">
-        <img class="nav-link dropdown-toggle rounded-circle d-none d-lg-block" role="button" data-bs-toggle="dropdown"
-             aria-expanded="false"
-             [ngSrc]="profileService.getAvatar" width="60" height="60" style="object-fit: contain;"
-             referrerpolicy="no-referrer"
-             alt="Avatar"/>
+
+    <!-- User Dropdown -->
+    <div class="nav-item dropdown ms-3" [ngClass]="{'d-none': !isLogin}">
+      <a href="javascript:void(0)" class="navbar-brand d-flex align-items-center p-0 position-relative">
+        <div class="avatar-container position-relative"
+             style="border-radius: 50%; overflow: hidden; box-shadow: 0 4px 20px rgba(0,123,255,0.3); transition: all 0.3s ease;">
+          <img class="nav-link dropdown-toggle rounded-circle d-none d-lg-block border-0 p-0"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false"
+               [ngSrc]="profileService.getAvatar" width="50" height="50"
+               style="object-fit: cover; transition: transform 0.3s ease;"
+               referrerpolicy="no-referrer" alt="Avatar"/>
+          <div class="avatar-overlay position-absolute top-0 start-0 w-100 h-100 rounded-circle"
+               style="background: rgba(0,123,255,0.2); opacity: 0; transition: opacity 0.3s ease;"></div>
+        </div>
       </a>
-      <ul class="dropdown-menu dropdown-menu-2">
-        <li><a class="dropdown-item" (click)="directLink('/profile', '')">Trang cá nhân</a></li>
-        <li><a class="dropdown-item" href="javascript:void(0)" (click)="logout()">Đăng xuất</a></li>
+      <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 p-2 mt-2"
+          style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); min-width: 180px;">
+        <li>
+          <a class="dropdown-item px-3 py-2 rounded-2 fw-medium" (click)="directLink('/profile', '')"
+             style="color: #495057; transition: all 0.3s ease;">
+            <i class="fas fa-user me-2"></i>Trang cá nhân
+          </a>
+        </li>
+        <li><hr class="dropdown-divider my-1" style="opacity: 0.1;"></li>
+        <li>
+          <a class="dropdown-item px-3 py-2 rounded-2 fw-medium" href="javascript:void(0)" (click)="logout()"
+             style="color: #dc3545; transition: all 0.3s ease;">
+            <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+          </a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
+
+<!-- CSS Styles -->
+<style>
+  /* Navbar hover effects */
+  .navbar-brand:hover .logo-wrapper {
+    transform: scale(1.05);
+  }
+
+  .navbar-brand:hover .brand-underline {
+    width: 100% !important;
+  }
+
+  /* Navigation links */
+  .nav-link {
+    cursor: pointer;
+  }
+
+  .nav-link:hover {
+    color: #007bff !important;
+    background: rgba(0,123,255,0.1) !important;
+    transform: translateY(-1px);
+  }
+
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0,123,255,0.1), rgba(0,123,255,0.2));
+    transition: left 0.3s ease;
+    z-index: 1;
+  }
+
+  .nav-link:hover::before {
+    left: 0;
+  }
+
+  /* Active navigation state */
+  .active-nav {
+    background: linear-gradient(135deg, #007bff, #0056b3) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+  }
+
+  .active-nav .nav-text {
+    color: white !important;
+  }
+
+  /* Login button effects */
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,123,255,0.4) !important;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+    transition: left 0.3s ease;
+    z-index: 1;
+  }
+
+  .btn-primary:hover::before {
+    left: 0;
+  }
+
+  /* Avatar hover effects */
+  .avatar-container:hover img {
+    transform: scale(1.1);
+  }
+
+  .avatar-container:hover .avatar-overlay {
+    opacity: 1 !important;
+  }
+
+  /* Dropdown improvements */
+  .dropdown-item:hover {
+    background: rgba(0,123,255,0.1) !important;
+    transform: translateX(5px);
+  }
+
+  /* Responsive improvements */
+  @media (max-width: 991px) {
+    .navbar-collapse {
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(10px);
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-top: 1rem;
+    }
+
+    .navbar-nav {
+      padding: 2rem 1rem !important;
+    }
+
+    .nav-item {
+      margin: 0.5rem 0;
+    }
+  }
+
+  /* Smooth scrolling and animations */
+  .navbar {
+    transition: all 0.3s ease;
+  }
+
+  /* VIP badge animation */
+  .vip-badge {
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translate(50%, -50%) scale(1); }
+    50% { transform: translate(50%, -50%) scale(1.1); }
+  }
+
+  /* Toggle button improvements */
+  .navbar-toggler:hover {
+    background: rgba(0,123,255,0.2) !important;
+    transform: scale(1.05);
+  }
+
+  /* Focus states for accessibility */
+  .nav-link:focus,
+  .btn:focus,
+  .dropdown-toggle:focus {
+    outline: 2px solid rgba(0,123,255,0.5);
+    outline-offset: 2px;
+  }
+</style>

@@ -92,7 +92,7 @@ export class ChatbotComponent implements OnInit {
   }
 
   geminiChat() {
-    this.payChat('api/vertex/gemini/ask');
+    this.payChat('api/gemini/ask/v1');
   }
 
   palm2Chat() {

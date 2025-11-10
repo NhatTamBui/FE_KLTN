@@ -14,13 +14,17 @@ import {CONSTANT} from '../../../common/constant';
   styleUrls: ['./history-exam-detail.component.scss']
 })
 export class HistoryExamDetailComponent implements OnInit {
-  examHistory: any;
   exam: any;
   listAnswer: any = [];
   colorLow = '#e2080f';
   colorMedium = '#d9e024';
   colorHigh = '#87d068';
   timeZone: string = CONSTANT.timeZone;
+  examHistory: any = {
+    colorListening: this.colorLow,
+    colorReading: this.colorLow,
+    colorTotal: this.colorLow
+  };
 
   constructor(private toast: ToastrService,
               private http: HttpClient,
