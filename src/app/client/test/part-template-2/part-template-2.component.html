@@ -4,9 +4,11 @@
       {{ part?.partContent }}
     </p>
   </div>
-  <div class="col-5" [ngClass]="{'d-none': indexPart == 5}">
-    <app-audio-part [audioSource]="part?.partAudio"></app-audio-part>
-  </div>
+  @if(indexPart != 5 && !isReal) {
+    <div class="col-5 ">
+      <app-audio-part [audioSource]="part?.partAudio"></app-audio-part>
+    </div>
+  }
   <ng-container *ngFor="let item of part?.questions; let part1Index = index;">
     <div class="row mt-3" id="questionContainer_0_{{item?.questionId}}">
       <ng-container *ngIf="item?.questionImage">
@@ -15,13 +17,12 @@
             nz-image
             nz-tooltip="Click vào để xem rõ hơn."
             class="nz-image"
-            loading="lazy"
             [nzSrc]="item?.questionImage"
             [alt]="'TOEICUTE'"
           />
         </div>
       </ng-container>
-      <div class="col-6">
+      <div class="col-{{indexPart == 1 ? '6' : '12'}}">
         <ng-container *ngIf="!item?.questionContent">
           <div class="col-12 fw-bold fs-6">Câu  {{ item?.questionNumber }} - Answer this question:</div>
         </ng-container>

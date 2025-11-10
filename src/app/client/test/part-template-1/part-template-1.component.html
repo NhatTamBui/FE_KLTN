@@ -4,13 +4,15 @@
       {{ part?.partContent }}
     </p>
   </div>
-  <div class="col-5" [ngClass]="{'d-none': partIndex == 0}">
-    <app-audio-part [audioSource]="part?.partAudio"></app-audio-part>
-  </div>
+  @if (partIndex != 6 && !isReal) {
+    <div class="col-5 ">
+      <app-audio-part [audioSource]="part?.partAudio"></app-audio-part>
+    </div>
+  }
   <ng-container *ngFor="let item of part?.questions; let part3Index = index;">
     <div class="row">
       <ng-container *ngIf="part3Index % numberQuestion == 0">
-                <span class="col-12 mt-2 fs-6 fw-bold fs-6">Question {{ item?.questionNumber }}
+                <span class="col-12 mt-2 fs-6 fw-bold">Question {{ item?.questionNumber }}
                   - {{ Number(item?.questionNumber) + 2 }}
                   refer to
                   following conversation: </span>
@@ -24,26 +26,27 @@
             />
           </div>
         </ng-container>
-        <div class="col-5 px-2">
+        <div class="col-12">
           <div class="row">
             <ng-container *ngFor="let i of counter(numberQuestion); let counterIndex = index;">
-              <div class="col-12 mt-1 fw-bold fs-6 mt-3" translate="no"
+              <div class="col-12 mt-1 fw-bold fs-6" translate="no"
                    id="questionContainer_5_{{part?.questions[part3Index + counterIndex]?.questionId}}">
-                Câu  {{ part?.questions[part3Index + counterIndex]?.questionNumber }}: {{ part?.questions[part3Index + counterIndex]?.questionContent }}
+                Câu  {{ part?.questions[part3Index + counterIndex]?.questionNumber }}
+                : {{ part?.questions[part3Index + counterIndex]?.questionContent }}
               </div>
 
               <div class="col-12">
                 <nz-radio-group nzName="radiogroup" translate="no"
                                 [(ngModel)]="selectedAnswer[part?.questions[part3Index + counterIndex]?.questionId]"
                                 (ngModelChange)="changeStateButton($event, part?.questions[part3Index + counterIndex]?.questionId)">
-                  <label nz-radio
-                         nzValue="A">{{ part?.questions[part3Index + counterIndex]?.answerA }}</label>
-                  <label nz-radio
-                         nzValue="B">{{ part?.questions[part3Index + counterIndex]?.answerB }}</label>
-                  <label nz-radio
-                         nzValue="C">{{ part?.questions[part3Index + counterIndex]?.answerC }}</label>
-                  <label nz-radio
-                         nzValue="D">{{ part?.questions[part3Index + counterIndex]?.answerD }}</label>
+                  <label nz-radio class="text-wrap"
+                         nzValue="A">{{ part?.questions[part3Index + counterIndex]?.answerA }}</label> <br/>
+                  <label nz-radio class="text-wrap"
+                         nzValue="B">{{ part?.questions[part3Index + counterIndex]?.answerB }}</label> <br/>
+                  <label nz-radio class="text-wrap"
+                         nzValue="C">{{ part?.questions[part3Index + counterIndex]?.answerC }}</label> <br/>
+                  <label nz-radio class="text-wrap"
+                         nzValue="D">{{ part?.questions[part3Index + counterIndex]?.answerD }}</label> <br/>
                 </nz-radio-group>
               </div>
             </ng-container>

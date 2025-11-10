@@ -46,6 +46,7 @@ export class StartComponent implements OnInit, OnDestroy, AfterViewInit {
   buttonStates: { [key: number]: boolean } = {};
   currentExam: any;
   listPart: any = [];
+  audio: any;
   selectedIndex: number = 0;
   selectedAnswer: { [key: number]: string } = {};
   param: any = {};
@@ -61,6 +62,7 @@ export class StartComponent implements OnInit, OnDestroy, AfterViewInit {
   mouseEnterSubject$ = new Subject<void>();
   showAlert: boolean[] = Array(10).fill(false);
   defaultFormatAnswer: string = CONSTANT.formatAnswer;
+  isRealTest: boolean = true;
 
   constructor(private toast: ToastrService,
               private http: HttpClient,
@@ -75,7 +77,11 @@ export class StartComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (!this.profileService.userIsLogin() && !this.profileService.currentUser.userId) {
+
+  }
+
+  ngOnInit(): void {
+    if (!this.profileService.userIsLogin) {
       const confirmModal: NzModalRef = this.modal.create({
         nzTitle: `Vui lòng đăng nhập để thực hiện bài thi`,
         nzContent: `Bạn chưa đăng nhập, vui lòng đăng nhập để thực hiện bài thi?`,
@@ -100,12 +106,12 @@ export class StartComponent implements OnInit, OnDestroy, AfterViewInit {
       });
     } else {
       this.initData();
+      // remove iframe have id kommunicate-widget-iframe
+      const scriptElement = document.getElementById('kommunicate-widget-iframe');
+      if (scriptElement) {
+        scriptElement.remove();
+      }
     }
-  }
-
-  ngOnInit(): void {
-    this.checkNetworkStatus();
-    this.detectMultipleLogin();
   }
 
   detectMultipleLogin() {
@@ -118,20 +124,17 @@ export class StartComponent implements OnInit, OnDestroy, AfterViewInit {
                 nzTitle: `Tài khoản của bạn đã đăng nhập ở một thiết bị khác! Vui lòng đăng nhập lại!`,
                 nzContent: ``,
                 nzCentered: true,
-                nzFooter: [
-                  {
-                    label: 'Đồng ý',
-                    type: 'primary',
-                    onClick: () => {
-                      localStorage.removeItem('token');
-                      localStorage.removeItem('tokenValid');
-                      localStorage.removeItem('profile');
-                      localStorage.removeItem(`${this.defaultFormatAnswer}_${this.currentExam.examId}`);
-                      window.location.href = '/home';
-                      confirmModal.destroy();
-                    }
-                  }
-                ]
+                nzClosable: false,
+                nzCancelDisabled: true,
+                nzOkText: 'Thoát',
+                nzOnOk: () => {
+                  localStorage.removeItem('token');
+                  localStorage.removeItem('tokenValid');
+                  localStorage.removeItem('profile');
+                  localStorage.removeItem(`${this.defaultFormatAnswer}_${this.currentExam.examId}`);
+                  window.location.href = '/home';
+                  confirmModal.destroy();
+                },
               });
             }
           }
@@ -226,8 +229,14 @@ export class StartComponent implements OnInit, OnDestroy, AfterViewInit {
         .subscribe((res: any) => {
           if (res?.success) {
             this.currentExam = res?.data;
+            this.isRealTest = !this.currentExam?.isFree;
             this.listPart = res?.data?.parts;
+            this.audio = res?.data.examAudio;
             this.initializeSelectedAnswer();
+            if (this.isRealTest) {
+              this.checkNetworkStatus();
+              this.detectMultipleLogin();
+            }
           } else {
             this.toast.error(res?.message);
             window.location.href = '/list-test';
@@ -301,13 +310,8 @@ export class StartComponent implements OnInit, OnDestroy, AfterViewInit {
         }))
       .subscribe((res: any) => {
         if (res?.success) {
-          this.ngOnDestroy();
           localStorage.removeItem(`${this.defaultFormatAnswer}_${this.currentExam.examId}`);
-          this.http.post(`api/user-exam-log/remove-answer/${this.currentExam.examId}`, {})
-            .subscribe({
-              next: _ => {
-              }
-            });
+          this.ngOnDestroy();
           this.toast.success('Nộp bài thành công');
           this.router.navigate([`/my-exam/detail/${res?.data}`]).then();
         } else {
@@ -391,19 +395,19 @@ export class StartComponent implements OnInit, OnDestroy, AfterViewInit {
                 this.selectedAnswer[answer.questionId] = answer.answer;
                 this.buttonStates[answer.questionId] = !!answer.answer;
               });
+              if (this.param?.endTime && new Date(this.param.endTime).getTime() < new Date().getTime()) {
+                this.toast.error('Bài thi đã hết giờ làm bài');
+                const isNotSelectAll = this.checkSelectedAll();
+                this.submitTest(isNotSelectAll);
+              } else if (haveData) {
+                this.totalTimeInSeconds = (new Date(this.param.endTime).getTime() - new Date().getTime()) / 1000;
+                this.totalTimeInSeconds = Math.ceil(this.totalTimeInSeconds);
+              } else {
+                this.totalTimeInSeconds = 120 * 60;
+              }
             }
           }
         });
-      if (this.param?.endTime && new Date(this.param.endTime).getTime() < new Date().getTime()) {
-        this.toast.error('Bài thi đã hết giờ làm bài');
-        const isNotSelectAll = this.checkSelectedAll();
-        this.submitTest(isNotSelectAll);
-      } else if (haveData) {
-        this.totalTimeInSeconds = (new Date(this.param.endTime).getTime() - new Date().getTime()) / 1000;
-        this.totalTimeInSeconds = Math.ceil(this.totalTimeInSeconds);
-      } else {
-        this.totalTimeInSeconds = 120 * 60;
-      }
       if (!this.param?.examId) {
         this.param.examId = this.currentExam.examId;
         this.param.totalTime = 120 * 60;
@@ -429,8 +433,10 @@ export class StartComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.startTimer();
     this.cacheAnswer();
-    this.detectTabVisibility();
-    this.detectMouseMove();
+    if (this.isRealTest) {
+      this.detectTabVisibility();
+      this.detectMouseMove();
+    }
   }
 
   changePart(event: any) {

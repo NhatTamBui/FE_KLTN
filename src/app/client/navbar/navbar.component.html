@@ -16,14 +16,14 @@
       </li>
 
       <li class="nav-item">
-        <a (click)="directLink('/list-test', 'test')" class="nav-item nav-link"
-           [ngClass]="{'active': activeNav=='test'}">
+        <a (click)="directLink('/list-test', 'list-test')" class="nav-item nav-link"
+           [ngClass]="{'active': activeNav=='list-test'}">
           Luyện thi
         </a>
       </li>
       <li class="nav-item">
-        <a (click)="directLink('/list-test', 'test')" class="nav-item nav-link d-none"
-           [ngClass]="{'active': activeNav=='test'}">Thi</a>
+        <a (click)="directLink('/tests', 'tests')" class="nav-item nav-link"
+           [ngClass]="{'active': activeNav=='tests', 'd-none': !userVip}">Thi</a>
       </li>
       <li class="nav-item">
         <a (click)="directLink('/my-exam', 'my-exam')" class="nav-item nav-link"
@@ -32,6 +32,9 @@
       </li>
       <li class="nav-item">
         <a (click)="directLink('/blog', 'blog')" class="nav-item nav-link" [ngClass]="{'active': activeNav=='blog'}">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a (click)="directLink('/chat', 'chat')" class="nav-item nav-link" [ngClass]="{'active': activeNav=='chat'}">Room chat</a>
       </li>
       <li class="nav-item">
         <a (click)="directLink('/profile', '')" class="nav-item nav-link d-xl-none">Trang cá nhân</a>
