@@ -3,53 +3,324 @@
   [currentPage]="currentPage">
 </app-page-header>
 
-<div class="container">
-  <div class="col-12">
-    <canvas baseChart
-            [type]="'pie'"
-            [datasets]="pieChartDatasets"
-            [labels]="pieChartLabels"
-            [options]="pieChartOptions"
-            [plugins]="pieChartPlugins"
-            [legend]="pieChartLegend">
-    </canvas>
-  </div>
-</div>
-
-<div class="page-header">
-  <h1 class="col-12 text-center">Statistic User Exam</h1>
-  <div class="col-lg-12 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <nz-table #borderedTable nzBordered [nzData]="listExam" [nzShowPagination]="false" nzTableLayout="fixed">
-          <thead>
-          <tr>
-            <th scope="col">Exam Name</th>
-            <th scope="col">Total Turn Test</th>
-            <th scope="col">Max Score</th>
-            <th scope="col">Min Score</th>
-            <th scope="col">Percent Correct</th>
-            <th scope="col">#</th>
-          </tr>
-          </thead>
-          <tbody>
-            @for (data of borderedTable.data; track data) {
-              <tr>
-                <td>{{ data.examName }}</td>
-                <td>{{ data.numberOfUserDoExam }}</td>
-                <td>{{ data.maxScore }}</td>
-                <td>{{ data.minScore }}</td>
-                <td>{{ data.percent }} %</td>
-                <td>
-                  <button class="btn btn-outline-primary btn-sm" (click)="viewDetai(data.examId)">View Detail</button>
-                </td>
-              </tr>
-            }
-          </tbody>
-        </nz-table>
-
+<div class="container-fluid px-4">
+  <!-- Chart Section -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-gradient-primary text-white py-3">
+          <h4 class="mb-0 text-center">
+            <i class="fas fa-chart-pie me-2"></i>
+            Exam Distribution Overview
+          </h4>
+        </div>
+        <div class="card-body p-4">
+          <div class="chart-container" style="position: relative; height: 400px;">
+            <canvas baseChart
+                    [type]="'pie'"
+                    [datasets]="pieChartDatasets"
+                    [labels]="pieChartLabels"
+                    [options]="pieChartOptions"
+                    [plugins]="pieChartPlugins"
+                    [legend]="pieChartLegend">
+            </canvas>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Table Section -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-gradient-info text-white py-3">
+          <h4 class="mb-0 text-center">
+            <i class="fas fa-table me-2"></i>
+            Exam Statistics Details
+          </h4>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <nz-table
+              #borderedTable
+              nzBordered
+              [nzData]="listExam"
+              [nzShowPagination]="false"
+              nzTableLayout="fixed"
+              class="modern-table">
+              <thead>
+              <tr class="table-header-gradient">
+                <th scope="col" class="text-center fw-bold text-black">
+                  <i class="fas fa-graduation-cap me-2"></i>Exam Name
+                </th>
+                <th scope="col" class="text-center fw-bold text-black">
+                  <i class="fas fa-users me-2"></i>Total Attempts
+                </th>
+                <th scope="col" class="text-center fw-bold text-black">
+                  <i class="fas fa-trophy me-2"></i>Max Score
+                </th>
+                <th scope="col" class="text-center fw-bold text-black">
+                  <i class="fas fa-minus-circle me-2"></i>Min Score
+                </th>
+                <th scope="col" class="text-center fw-bold text-black">
+                  <i class="fas fa-percentage me-2"></i>Success Rate
+                </th>
+                <th scope="col" class="text-center fw-bold text-black">
+                  <i class="fas fa-cog me-2"></i>Actions
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+                @for (data of borderedTable.data; track data; let i = $index) {
+                  <tr class="table-row-hover" [class.table-row-even]="i % 2 === 0">
+                    <td class="align-middle">
+                      <div class="d-flex align-items-center">
+                        <div class="exam-icon me-3">
+                          <i class="fas fa-file-alt text-primary"></i>
+                        </div>
+                        <div>
+                          <span class="fw-semibold text-dark">{{ data.examName }}</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-center align-middle">
+                      <span class="badge bg-info fs-6 px-3 py-2">
+                        {{ data.numberOfUserDoExam }}
+                      </span>
+                    </td>
+                    <td class="text-center align-middle">
+                      <span class="badge bg-success fs-6 px-3 py-2">
+                        <i class="fas fa-arrow-up me-1"></i>{{ data.maxScore }}
+                      </span>
+                    </td>
+                    <td class="text-center align-middle">
+                      <span class="badge bg-warning fs-6 px-3 py-2">
+                        <i class="fas fa-arrow-down me-1"></i>{{ data.minScore }}
+                      </span>
+                    </td>
+                    <td class="text-center align-middle">
+                      <div class="progress-container">
+                        <span class="badge bg-primary fs-6 px-3 py-2 mb-2">
+                          {{ data.percent }}%
+                        </span>
+                        <div class="progress" style="height: 8px;">
+                          <div
+                            class="progress-bar bg-gradient-success"
+                            role="progressbar"
+                            [style.width.%]="data.percent"
+                            [attr.aria-valuenow]="data.percent"
+                            aria-valuemin="0"
+                            aria-valuemax="100">
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-center align-middle">
+                      <button
+                        class="btn btn-primary btn-modern waves-effect waves-light"
+                        (click)="viewDetai(data.examId)">
+                        <i class="fas fa-eye me-2"></i>View Details
+                      </button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </nz-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<style>
+  /* Gradient Backgrounds */
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  }
+
+  .bg-gradient-info {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+  }
+
+  .bg-gradient-success {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%) !important;
+  }
+
+  /* Card Enhancements */
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none !important;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+  }
+
+  /* Table Styling */
+  .modern-table {
+    overflow: hidden;
+    border-radius: 0 0 15px 15px;
+  }
+
+  .table-header-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .table-header-gradient th {
+    border: none !important;
+    padding: 15px 10px;
+    font-weight: 600;
+    font-size: 14px;
+    color: black;
+    letter-spacing: 0.5px;
+  }
+
+  .table-row-hover {
+    transition: all 0.3s ease;
+    border: none !important;
+  }
+
+  .table-row-hover:hover {
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8f4ff 100%);
+    transform: scale(1.01);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  }
+
+  .table-row-even {
+    background-color: #f8f9fa;
+  }
+
+  .table-row-hover td {
+    border-color: #e9ecef !important;
+    padding: 20px 15px;
+    vertical-align: middle;
+  }
+
+  /* Icon Styling */
+  .exam-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white !important;
+    font-size: 16px;
+  }
+
+  /* Button Enhancements */
+  .btn-modern {
+    border-radius: 25px;
+    padding: 8px 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .btn-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  }
+
+  /* Badge Enhancements */
+  .badge {
+    border-radius: 15px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+
+  /* Progress Bar */
+  .progress {
+    border-radius: 10px;
+    background-color: #e9ecef;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    border-radius: 10px;
+    transition: width 0.8s ease-in-out;
+  }
+
+  /* Chart Container */
+  .chart-container {
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8f4ff 100%);
+    border-radius: 15px;
+    padding: 20px;
+  }
+
+  /* Responsive Enhancements */
+  @media (max-width: 768px) {
+    .container-fluid {
+      padding: 0 15px;
+    }
+
+    .card-header h4 {
+      font-size: 18px;
+    }
+
+    .btn-modern {
+      padding: 6px 15px;
+      font-size: 12px;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 4px 8px;
+    }
+
+    .exam-icon {
+      width: 35px;
+      height: 35px;
+      font-size: 14px;
+    }
+  }
+
+  /* Animation for page load */
+  .card {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Wave effect */
+  .waves-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .waves-effect:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: width 0.6s, height 0.6s;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+  }
+
+  .waves-effect:active:before {
+    width: 300px;
+    height: 300px;
+  }
+</style>

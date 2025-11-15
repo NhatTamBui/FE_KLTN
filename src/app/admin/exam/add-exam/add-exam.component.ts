@@ -60,8 +60,8 @@ export class AddExamComponent implements OnInit {
 
   addNewExam() {
     if (this.validateInput()) {
-      this.clearFormdata();
       this.spinnerService.show().then();
+      this.clearFormdata();
       this.formData.append('examName', this.param.examName);
       this.formData.append('topicId', this.param.topicId || '-1');
       this.formData.append('isFree', this.param.isFree);
@@ -103,6 +103,8 @@ export class AddExamComponent implements OnInit {
   }
 
   validateInput() {
+
+
     if (!this.param.examName) {
       const title: string = 'Exam name must not be empty';
       this.toastr.error('', title, {

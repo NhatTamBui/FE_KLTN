@@ -1,62 +1,128 @@
-<nav class="sidebar sidebar-offcanvas mt-2" id="sidebar">
-  <ul class="nav">
-    <li class="nav-item nav-profile">
-      <a href="#" class="nav-link">
-        <div class="nav-profile-image">
-          <img ngSrc="assets/images/admin-avatar.jpg" alt="profile" height="360" width="360">
-          <span class="login-status online"></span>
+<nav class="sidebar sidebar-offcanvas enhanced-sidebar mt-2 position-relative overflow-hidden" id="sidebar">
+
+  <!-- Background Decorations -->
+  <div class="sidebar-decoration position-absolute w-100 h-100">
+    <div class="decoration-circle circle-1"></div>
+    <div class="decoration-circle circle-2"></div>
+    <div class="decoration-circle circle-3"></div>
+  </div>
+
+  <ul class="nav position-relative">
+
+    <!-- Enhanced Profile Section -->
+    <li class="nav-item nav-profile enhanced-profile">
+      <a href="#" class="nav-link profile-link position-relative overflow-hidden">
+        <div class="profile-background position-absolute w-100 h-100"></div>
+
+        <div class="nav-profile-image position-relative">
+          <div class="profile-image-wrapper position-relative overflow-hidden">
+            <img ngSrc="assets/images/admin-avatar.jpg" alt="profile" height="360" width="360"
+                 class="profile-img">
+            <div class="profile-overlay position-absolute w-100 h-100"></div>
+          </div>
+          <span class="login-status online position-absolute">
+            <span class="status-pulse position-absolute w-100 h-100"></span>
+          </span>
         </div>
-        <div class="nav-profile-text d-flex flex-column">
-          <span class="font-weight-bold mb-2">TOEICUTE</span>
-          <span class="text-small">Admin</span>
+
+        <div class="nav-profile-text d-flex flex-column position-relative">
+          <span class="profile-name font-weight-bold mb-2 position-relative">
+            TOEICUTE
+            <div class="name-underline position-absolute"></div>
+          </span>
+          <span class="profile-role text-small position-relative">Admin</span>
         </div>
-        <i class="mdi mdi-bookmark-check text-primary nav-profile-badge"></i>
+
+        <i class="mdi mdi-bookmark-check nav-profile-badge position-relative">
+          <span class="badge-glow position-absolute"></span>
+        </i>
       </a>
     </li>
+
+    <!-- Member Menu Section -->
     <ng-container *ngFor="let menu of listMemberMenu">
       <ng-template [ngTemplateOutlet]="listMenu" [ngTemplateOutletContext]="{ item: menu }"></ng-template>
     </ng-container>
-    <div class="border-bottom"></div>
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="javascript:void(0)" aria-expanded="false"
-         aria-controls="general-pages">
-        <span class="menu-title"> System setting </span>
-        <i class="mdi mdi-home-assistant menu-icon"></i>
+
+    <!-- Enhanced Divider -->
+    <div class="enhanced-divider position-relative my-3">
+      <div class="divider-line position-absolute w-100"></div>
+      <div class="divider-glow position-absolute w-100"></div>
+    </div>
+
+    <!-- System Settings Header -->
+    <li class="nav-item section-header">
+      <a class="nav-link section-link position-relative overflow-hidden"
+         data-bs-toggle="collapse" href="javascript:void(0)"
+         aria-expanded="false" aria-controls="general-pages">
+        <div class="section-background position-absolute w-100 h-100"></div>
+        <span class="menu-title section-title position-relative">System Setting</span>
+        <i class="mdi mdi-home-assistant menu-icon section-icon position-relative"></i>
       </a>
-      <div class="border-bottom"></div>
+      <div class="enhanced-divider position-relative my-2">
+        <div class="divider-line position-absolute w-100"></div>
+      </div>
     </li>
+
+    <!-- System Menu Section -->
     <ng-container *ngFor="let menu of listSystemMenu">
       <ng-template [ngTemplateOutlet]="listMenu" [ngTemplateOutletContext]="{ item: menu }"></ng-template>
     </ng-container>
   </ul>
 </nav>
 
+<!-- Enhanced Menu Template -->
 <ng-template #listMenu let-menu="item">
+  <!-- Regular Menu Item -->
   <ng-container *ngIf="!menu.haveChild">
-    <li class="nav-item">
-      <a class="nav-link" [href]="menu.path"
+    <li class="nav-item enhanced-nav-item">
+      <a class="nav-link enhanced-nav-link position-relative overflow-hidden"
+         [href]="menu.path"
          [target]="listMenuGroupBlank.includes(menu.menuGroupId) ? 'blank' : ''">
-        <span class="menu-title">{{ menu.displayName }}</span>
-        <i [class]="menu.icon"></i>
+        <div class="nav-link-background position-absolute w-100 h-100"></div>
+        <div class="nav-link-content d-flex align-items-center position-relative">
+          <i [class]="menu.icon + ' nav-link-icon me-3'"></i>
+          <span class="menu-title nav-link-title">{{ menu.displayName }}</span>
+        </div>
+        <div class="nav-link-indicator position-absolute"></div>
       </a>
     </li>
   </ng-container>
+
+  <!-- Parent Menu Item with Children -->
   <ng-container *ngIf="menu.haveChild">
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse"
+    <li class="nav-item enhanced-nav-item parent-item">
+      <a class="nav-link enhanced-nav-link parent-link position-relative overflow-hidden"
+         data-bs-toggle="collapse"
          href="javascript:void(0)"
-         (click)="expendMenu(menu)"
-      >
-        <span class="menu-title">{{ menu.displayName }}</span>
-        <i class="menu-arrow"></i>
-        <i [class]="menu.icon"></i>
+         (click)="expendMenu(menu)">
+        <div class="nav-link-background position-absolute w-100 h-100"></div>
+        <div class="nav-link-content d-flex align-items-center justify-content-between position-relative">
+          <div class="parent-content d-flex align-items-center">
+            <i [class]="menu.icon + ' nav-link-icon me-3'"></i>
+            <span class="menu-title nav-link-title">{{ menu.displayName }}</span>
+          </div>
+          <i class="menu-arrow position-relative"
+             [ngClass]="{'expanded': menu.expanded}">
+            <span class="arrow-line arrow-line-1"></span>
+            <span class="arrow-line arrow-line-2"></span>
+          </i>
+        </div>
+        <div class="nav-link-indicator position-absolute"></div>
       </a>
-      <div class="collapse" [ngClass]="{'show': menu.expanded}">
-        <ul class="nav flex-column sub-menu">
+
+      <!-- Enhanced Submenu -->
+      <div class="collapse submenu-collapse" [ngClass]="{'show': menu.expanded}">
+        <ul class="nav flex-column sub-menu enhanced-submenu">
           <ng-container *ngFor="let submenu of menu.leftMenus">
-            <li class="nav-item">
-              <a class="nav-link" [href]="submenu.path">
-                <span class="menu-title">{{ submenu.displayName }}</span>
+            <li class="nav-item submenu-item">
+              <a class="nav-link submenu-link position-relative overflow-hidden" [href]="submenu.path">
+                <div class="submenu-background position-absolute w-100 h-100"></div>
+                <div class="submenu-content position-relative d-flex align-items-center">
+                  <div class="submenu-dot me-3"></div>
+                  <span class="menu-title submenu-title">{{ submenu.displayName }}</span>
+                </div>
+                <div class="submenu-indicator position-absolute"></div>
               </a>
             </li>
           </ng-container>
@@ -65,3 +131,461 @@
     </li>
   </ng-container>
 </ng-template>
+
+<!-- Enhanced CSS Styles -->
+<style>
+  /* Enhanced Sidebar Base */
+  .enhanced-sidebar {
+    background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+    box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+    border-radius: 0 20px 20px 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* Background Decorations */
+  .sidebar-decoration {
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .decoration-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    animation: float-decoration 20s infinite ease-in-out;
+  }
+
+  .circle-1 {
+    width: 120px;
+    height: 120px;
+    top: 10%;
+    right: -60px;
+    animation-delay: 0s;
+  }
+
+  .circle-2 {
+    width: 80px;
+    height: 80px;
+    top: 50%;
+    left: -40px;
+    animation-delay: -7s;
+  }
+
+  .circle-3 {
+    width: 60px;
+    height: 60px;
+    bottom: 20%;
+    right: -30px;
+    animation-delay: -14s;
+  }
+
+  @keyframes float-decoration {
+    0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; }
+    50% { transform: translateY(-15px) scale(1.1); opacity: 0.6; }
+  }
+
+  /* Enhanced Profile Section */
+  .enhanced-profile {
+    margin-bottom: 2rem;
+    padding: 0;
+  }
+
+  .profile-link {
+    padding: 1.5rem !important;
+    border-radius: 15px;
+    margin: 1rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .profile-background {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .profile-link:hover .profile-background {
+    opacity: 1;
+  }
+
+  .profile-image-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+  }
+
+  .profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+
+  .profile-overlay {
+    top: 0;
+    left: 0;
+    background: linear-gradient(135deg, rgba(0,123,255,0.3), rgba(102,126,234,0.3));
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .profile-link:hover .profile-img {
+    transform: scale(1.1);
+  }
+
+  .profile-link:hover .profile-overlay {
+    opacity: 1;
+  }
+
+  .profile-link:hover .profile-image-wrapper {
+    border-color: rgba(255,255,255,0.4);
+    box-shadow: 0 0 20px rgba(0,123,255,0.3);
+  }
+
+  /* Online Status */
+  .login-status.online {
+    width: 16px;
+    height: 16px;
+    background: #28a745;
+    border: 3px solid #2c3e50;
+    border-radius: 50%;
+    bottom: 2px;
+    right: 2px;
+  }
+
+  .status-pulse {
+    background: #28a745;
+    border-radius: 50%;
+    animation: pulse-status 2s infinite;
+  }
+
+  @keyframes pulse-status {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.8); opacity: 0; }
+  }
+
+  /* Profile Text */
+  .profile-name {
+    color: #ffffff !important;
+    font-size: 1.1rem;
+    font-weight: 700 !important;
+    transition: color 0.3s ease;
+  }
+
+  .name-underline {
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    transition: width 0.3s ease;
+  }
+
+  .profile-link:hover .name-underline {
+    width: 100%;
+  }
+
+  .profile-role {
+    color: rgba(255,255,255,0.7) !important;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+
+  /* Profile Badge */
+  .nav-profile-badge {
+    color: #007bff !important;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .badge-glow {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0,123,255,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .profile-link:hover .nav-profile-badge {
+    color: #ffffff !important;
+    transform: scale(1.2);
+  }
+
+  .profile-link:hover .badge-glow {
+    opacity: 1;
+  }
+
+  /* Enhanced Dividers */
+  .enhanced-divider {
+    height: 1px;
+    margin: 1.5rem 1rem;
+  }
+
+  .divider-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  }
+
+  .divider-glow {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,123,255,0.5), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Section Header */
+  .section-header .section-link {
+    padding: 1rem 1.5rem !important;
+    margin: 0.5rem 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .section-background {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,123,255,0.1));
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .section-link:hover .section-background {
+    opacity: 1;
+  }
+
+  .section-title {
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .section-icon {
+    color: #007bff !important;
+    font-size: 1.1rem;
+  }
+
+  /* Enhanced Navigation Items */
+  .enhanced-nav-item {
+    margin: 0.25rem 1rem;
+  }
+
+  .enhanced-nav-link {
+    padding: 0.75rem 1rem !important;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    color: rgba(255,255,255,0.8) !important;
+  }
+
+  .nav-link-background {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,123,255,0.1));
+    border-radius: 10px;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .enhanced-nav-link:hover .nav-link-background {
+    opacity: 1;
+  }
+
+  .enhanced-nav-link:hover {
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,0.2);
+    transform: translateX(5px);
+  }
+
+  .nav-link-icon {
+    color: #007bff;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+  }
+
+  .enhanced-nav-link:hover .nav-link-icon {
+    color: #ffffff;
+    transform: scale(1.1);
+  }
+
+  .nav-link-title {
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link-indicator {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #007bff, #0056b3);
+    border-radius: 0 3px 3px 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .enhanced-nav-link:hover .nav-link-indicator {
+    opacity: 1;
+  }
+
+  /* Custom Arrow */
+  .menu-arrow {
+    width: 12px;
+    height: 12px;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .arrow-line {
+    position: absolute;
+    width: 8px;
+    height: 1.5px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 1px;
+    transition: all 0.3s ease;
+  }
+
+  .arrow-line-1 {
+    top: 4px;
+    right: 0;
+    transform: rotate(45deg);
+    transform-origin: right;
+  }
+
+  .arrow-line-2 {
+    top: 7px;
+    right: 0;
+    transform: rotate(-45deg);
+    transform-origin: right;
+  }
+
+  .menu-arrow.expanded .arrow-line-1 {
+    transform: rotate(-45deg);
+  }
+
+  .menu-arrow.expanded .arrow-line-2 {
+    transform: rotate(45deg);
+  }
+
+  /* Enhanced Submenu */
+  .enhanced-submenu {
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    margin: 0.5rem 0;
+    padding: 0.5rem 0;
+    border-left: 3px solid rgba(0,123,255,0.3);
+  }
+
+  .submenu-item {
+    margin: 0.125rem 0.5rem;
+  }
+
+  .submenu-link {
+    padding: 0.5rem 1rem !important;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    color: rgba(255,255,255,0.7) !important;
+    position: relative;
+  }
+
+  .submenu-background {
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(0,123,255,0.05));
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .submenu-link:hover .submenu-background {
+    opacity: 1;
+  }
+
+  .submenu-link:hover {
+    color: #ffffff !important;
+    transform: translateX(5px);
+  }
+
+  .submenu-dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .submenu-link:hover .submenu-dot {
+    background: #007bff;
+    transform: scale(1.5);
+  }
+
+  .submenu-title {
+    font-size: 0.85rem;
+    font-weight: 400;
+  }
+
+  .submenu-indicator {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 60%;
+    background: #007bff;
+    border-radius: 1px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .submenu-link:hover .submenu-indicator {
+    opacity: 1;
+  }
+
+  /* Scrollbar Styling */
+  .enhanced-sidebar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .enhanced-sidebar::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+  }
+
+  .enhanced-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(0,123,255,0.5);
+    border-radius: 2px;
+  }
+
+  .enhanced-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0,123,255,0.7);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 991px) {
+    .enhanced-sidebar {
+      border-radius: 0;
+    }
+  }
+
+  /* Performance Optimizations */
+  .enhanced-nav-link,
+  .submenu-link,
+  .profile-link {
+    will-change: transform;
+  }
+
+  .decoration-circle {
+    will-change: transform;
+  }
+</style>

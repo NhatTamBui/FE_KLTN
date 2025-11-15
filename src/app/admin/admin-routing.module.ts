@@ -35,7 +35,7 @@ const routes: Routes = [
       {path: 'pricing', loadChildren: () => import('./price/price.module').then(m => m.PriceModule)},
       {path: 'statistic/exam/:examId', component: DetailExamComponent},
     ]
-  }
+  },
 ];
 
 @NgModule({

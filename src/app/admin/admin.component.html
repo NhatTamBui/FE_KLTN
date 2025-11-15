@@ -1,50 +1,120 @@
 @if (canActivate) {
-  <div class="container-scroller">
+  <div class="container-scroller enhanced-admin-layout position-relative">
+
+    <!-- Background Animation -->
+    <div class="admin-background position-fixed w-100 h-100">
+      <div class="bg-particle particle-1"></div>
+      <div class="bg-particle particle-2"></div>
+      <div class="bg-particle particle-3"></div>
+      <div class="bg-particle particle-4"></div>
+      <div class="bg-particle particle-5"></div>
+    </div>
+
     <app-navbar></app-navbar>
-    <div class="container-fluid page-body-wrapper">
-      <nav class="sidebar sidebar-offcanvas mt-2" id="sidebar">
-        <ul class="nav">
-          <li class="nav-item nav-profile">
-            <a href="javascript:void(0)" class="nav-link">
-              <div class="nav-profile-image">
-                <img ngSrc="assets/images/admin-avatar.jpg" alt="profile" height="360" width="360">
-                <span class="login-status online"></span>
+
+    <div class="container-fluid page-body-wrapper enhanced-body-wrapper position-relative">
+
+      <!-- Enhanced Sidebar -->
+      <nav class="sidebar sidebar-offcanvas enhanced-admin-sidebar mt-2 position-relative" id="sidebar">
+
+        <!-- Sidebar Glow Effect -->
+        <div class="sidebar-glow position-absolute"></div>
+
+        <ul class="nav enhanced-nav">
+
+          <!-- Enhanced Profile Section -->
+          <li class="nav-item nav-profile enhanced-admin-profile">
+            <a href="javascript:void(0)" class="nav-link admin-profile-link position-relative overflow-hidden">
+              <div class="admin-profile-bg position-absolute w-100 h-100"></div>
+
+              <div class="nav-profile-image admin-avatar-container position-relative">
+                <div class="avatar-ring position-absolute w-100 h-100"></div>
+                <img ngSrc="assets/images/admin-avatar.jpg" alt="profile" height="360" width="360"
+                     class="admin-avatar-img">
+                <span class="login-status online admin-status">
+                  <span class="status-ripple position-absolute"></span>
+                </span>
               </div>
-              <div class="nav-profile-text d-flex flex-column">
-                <span class="font-weight-bold mb-2">TOEICUTE</span>
-                <span class="text-small">Admin</span>
+
+              <div class="nav-profile-text d-flex flex-column admin-profile-text">
+                <span class="font-weight-bold mb-2 admin-name position-relative">
+                  TOEICMASTER
+                  <div class="admin-name-glow position-absolute"></div>
+                </span>
+                <span class="text-small admin-role">Admin</span>
               </div>
-              <i class="mdi mdi-bookmark-check text-primary nav-profile-badge"></i>
+
+              <i class="mdi mdi-bookmark-check admin-badge position-relative">
+                <span class="badge-pulse position-absolute"></span>
+              </i>
             </a>
           </li>
-          <div class="border-bottom"></div>
-          <li class="nav-item bg-gradient-light">
-            <a class="nav-link fw-bold" data-bs-toggle="collapse" href="javascript:void(0)" aria-expanded="false"
+
+          <!-- Enhanced Divider -->
+          <div class="enhanced-admin-divider position-relative">
+            <div class="divider-gradient position-absolute w-100"></div>
+            <div class="divider-shine position-absolute w-100"></div>
+          </div>
+
+          <!-- Member Site Setting Header -->
+          <li class="nav-item admin-section-header position-relative">
+            <a class="nav-link admin-section-link fw-bold position-relative overflow-hidden"
+               data-bs-toggle="collapse" href="javascript:void(0)" aria-expanded="false"
                aria-controls="general-pages">
-              <span class="menu-title fs-6"> Member site setting </span>
-              <i class="mdi mdi-home-assistant menu-icon text-dark"></i>
+              <div class="section-bg position-absolute w-100 h-100"></div>
+              <div class="section-content d-flex align-items-center justify-content-between position-relative">
+                <span class="menu-title fs-6 admin-section-title">Member Site Setting</span>
+                <i class="mdi mdi-home-assistant menu-icon admin-section-icon"></i>
+              </div>
+              <div class="section-glow position-absolute w-100 h-100"></div>
             </a>
           </li>
-          <div class="border-bottom"></div>
+
+          <div class="enhanced-admin-divider">
+            <div class="divider-gradient position-absolute w-100"></div>
+          </div>
+
+          <!-- Member Menu Items -->
           @for (menu of listMemberMenu; track menu) {
             <ng-template [ngTemplateOutlet]="listMenu" [ngTemplateOutletContext]="{ item: menu }"></ng-template>
           }
-          <div class="border-bottom"></div>
-          <li class="nav-item bg-gradient-light">
-            <a class="nav-link fw-bold" data-bs-toggle="collapse" href="javascript:void(0)" aria-expanded="false"
+
+          <div class="enhanced-admin-divider">
+            <div class="divider-gradient position-absolute w-100"></div>
+            <div class="divider-shine position-absolute w-100"></div>
+          </div>
+
+          <!-- System Setting Header -->
+          <li class="nav-item admin-section-header position-relative">
+            <a class="nav-link admin-section-link fw-bold position-relative overflow-hidden"
+               data-bs-toggle="collapse" href="javascript:void(0)" aria-expanded="false"
                aria-controls="general-pages">
-              <span class="menu-title fs-6"> System setting </span>
-              <i class="mdi mdi-home-assistant menu-icon text-dark"></i>
+              <div class="section-bg position-absolute w-100 h-100"></div>
+              <div class="section-content d-flex align-items-center justify-content-between position-relative">
+                <span class="menu-title fs-6 admin-section-title">System Setting</span>
+                <i class="mdi mdi-home-assistant menu-icon admin-section-icon"></i>
+              </div>
+              <div class="section-glow position-absolute w-100 h-100"></div>
             </a>
           </li>
-          <div class="border-bottom"></div>
+
+          <div class="enhanced-admin-divider">
+            <div class="divider-gradient position-absolute w-100"></div>
+          </div>
+
+          <!-- System Menu Items -->
           @for (menu of listSystemMenu; track menu) {
             <ng-template [ngTemplateOutlet]="listMenu" [ngTemplateOutletContext]="{ item: menu }"></ng-template>
           }
         </ul>
       </nav>
-      <div class="main-panel mt-5">
-        <div class="content-wrapper">
+
+      <!-- Enhanced Main Panel -->
+      <div class="main-panel enhanced-main-panel mt-5 position-relative">
+        <div class="main-panel-bg position-absolute w-100 h-100"></div>
+
+        <div class="content-wrapper enhanced-content-wrapper position-relative">
+          <div class="content-glow position-absolute"></div>
           <router-outlet></router-outlet>
           <app-footer></app-footer>
         </div>
@@ -52,43 +122,86 @@
     </div>
   </div>
 }
+
+<!-- Enhanced Spinner -->
 <ngx-spinner
-  bdColor="rgba(51,51,51,0.8)"
+  bdColor="rgba(20,30,45,0.95)"
   size="medium"
-  color="#fff"
+  color="#007bff"
   type="ball-scale-multiple"
+  class="enhanced-spinner"
 >
-  <p style="font-size: 20px; color: white">Loading...</p>
+  <div class="spinner-content text-center">
+    <div class="spinner-logo mb-3">
+      <i class="fas fa-graduation-cap spinner-icon"></i>
+    </div>
+    <p class="spinner-text">Loading TOEICMASTER...</p>
+    <div class="spinner-progress">
+      <div class="progress-bar"></div>
+    </div>
+  </div>
 </ngx-spinner>
-<button (click)="scrollToTop()" class="back-to-top-btn">
-  <i class="fa fa-arrow-up"></i>
+
+<!-- Enhanced Back to Top Button -->
+<button (click)="scrollToTop()" class="back-to-top-btn enhanced-back-to-top">
+  <div class="btn-bg position-absolute w-100 h-100"></div>
+  <i class="fa fa-arrow-up btn-icon position-relative"></i>
+  <div class="btn-ripple position-absolute"></div>
 </button>
 
+<!-- Enhanced Menu Template -->
 <ng-template #listMenu let-menu="item">
   @if (!menu.haveChild) {
-    <li class="nav-item">
-      <a class="nav-link" href="javascript:void(0)"
+    <!-- Regular Menu Item -->
+    <li class="nav-item enhanced-admin-nav-item">
+      <a class="nav-link admin-nav-link position-relative overflow-hidden"
+         href="javascript:void(0)"
          (click)="openTab(menu.path)">
-        <span class="menu-title">{{ menu.displayName }}</span>
-        <i [class]="menu.icon"></i>
+        <div class="nav-item-bg position-absolute w-100 h-100"></div>
+        <div class="nav-item-content d-flex align-items-center position-relative">
+          <i [class]="menu.icon + ' admin-nav-icon me-3'"></i>
+          <span class="menu-title admin-nav-title">{{ menu.displayName }}</span>
+        </div>
+        <div class="nav-item-indicator position-absolute"></div>
+        <div class="nav-item-glow position-absolute w-100 h-100"></div>
       </a>
     </li>
   } @else {
-    <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse"
+    <!-- Parent Menu Item -->
+    <li class="nav-item enhanced-admin-nav-item parent-nav-item">
+      <a class="nav-link admin-nav-link parent-nav-link position-relative overflow-hidden"
+         data-bs-toggle="collapse"
          href="javascript:void(0)"
-         (click)="expendMenu(menu)"
-      >
-        <span class="menu-title">{{ menu.displayName }}</span>
-        <i class="menu-arrow"></i>
-        <i [class]="menu.icon"></i>
+         (click)="expendMenu(menu)">
+        <div class="nav-item-bg position-absolute w-100 h-100"></div>
+        <div class="nav-item-content d-flex align-items-center justify-content-between position-relative">
+          <div class="parent-nav-content d-flex align-items-center">
+            <i [class]="menu.icon + ' admin-nav-icon me-3'"></i>
+            <span class="menu-title admin-nav-title">{{ menu.displayName }}</span>
+          </div>
+          <i class="menu-arrow admin-arrow position-relative"
+             [ngClass]="{'expanded': menu.expanded}">
+            <span class="admin-arrow-line admin-arrow-line-1"></span>
+            <span class="admin-arrow-line admin-arrow-line-2"></span>
+          </i>
+        </div>
+        <div class="nav-item-indicator position-absolute"></div>
+        <div class="nav-item-glow position-absolute w-100 h-100"></div>
       </a>
-      <div class="collapse" [ngClass]="{'show': menu.expanded}">
-        <ul class="nav flex-column sub-menu">
+
+      <!-- Enhanced Submenu -->
+      <div class="collapse admin-submenu-collapse" [ngClass]="{'show': menu.expanded}">
+        <ul class="nav flex-column sub-menu enhanced-admin-submenu">
           @for (submenu of menu.leftMenus; track submenu) {
-            <li class="nav-item">
-              <a class="nav-link" [routerLink]="submenu.path">
-                <span class="menu-title">{{ submenu.displayName }}</span>
+            <li class="nav-item admin-submenu-item">
+              <a class="nav-link admin-submenu-link position-relative overflow-hidden"
+                 [routerLink]="submenu.path">
+                <div class="submenu-item-bg position-absolute w-100 h-100"></div>
+                <div class="submenu-content d-flex align-items-center position-relative">
+                  <div class="admin-submenu-dot me-3"></div>
+                  <span class="menu-title admin-submenu-title">{{ submenu.displayName }}</span>
+                </div>
+                <div class="submenu-indicator position-absolute"></div>
               </a>
             </li>
           }
@@ -97,3 +210,834 @@
     </li>
   }
 </ng-template>
+
+<!-- Enhanced CSS Styles -->
+<style>
+  /* Admin Layout Base */
+  .enhanced-admin-layout {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
+  }
+
+  /* Background Animation */
+  .admin-background {
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .bg-particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(0,123,255,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float-admin 25s infinite ease-in-out;
+  }
+
+  .particle-1 {
+    width: 100px;
+    height: 100px;
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+  }
+
+  .particle-2 {
+    width: 150px;
+    height: 150px;
+    top: 70%;
+    right: 10%;
+    animation-delay: -8s;
+  }
+
+  .particle-3 {
+    width: 80px;
+    height: 80px;
+    top: 40%;
+    left: 80%;
+    animation-delay: -16s;
+  }
+
+  .particle-4 {
+    width: 120px;
+    height: 120px;
+    bottom: 20%;
+    left: 20%;
+    animation-delay: -12s;
+  }
+
+  .particle-5 {
+    width: 60px;
+    height: 60px;
+    top: 20%;
+    right: 40%;
+    animation-delay: -20s;
+  }
+
+  @keyframes float-admin {
+    0%, 100% { transform: translateY(0px) translateX(0px) scale(1); opacity: 0.3; }
+    25% { transform: translateY(-30px) translateX(20px) scale(1.1); opacity: 0.6; }
+    50% { transform: translateY(-60px) translateX(-10px) scale(0.9); opacity: 0.4; }
+    75% { transform: translateY(-20px) translateX(-30px) scale(1.05); opacity: 0.7; }
+  }
+
+/* Enhanced Body Wrapper */
+.enhanced-body-wrapper {
+  background: linear-gradient(135deg, #eaf6ff 0%, #d8edff 100%);
+  backdrop-filter: blur(8px);
+  color: #1e293b;
+}
+
+/* Enhanced Sidebar */
+.enhanced-admin-sidebar {
+  background: linear-gradient(180deg, #0077b6 0%, #005f99 50%, #003f73 100%);
+  border: none;
+  border-radius: 0 18px 18px 0;
+  box-shadow: 8px 0 25px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  color: #f1f5f9;
+}
+  .sidebar-glow {
+    top: 0;
+    right: -2px;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, rgba(0,123,255,0.6), transparent);
+    opacity: 0.7;
+  }
+
+  /* Enhanced Admin Profile */
+  .enhanced-admin-profile {
+    padding: 0;
+    margin: 1.5rem 1rem 2rem;
+  }
+
+  .admin-profile-link {
+    padding: 1.5rem !important;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.4s ease;
+  }
+
+  .admin-profile-bg {
+    background: linear-gradient(135deg, rgba(0,123,255,0.1), rgba(102,126,234,0.05));
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .admin-profile-link:hover .admin-profile-bg {
+    opacity: 1;
+  }
+
+  .admin-avatar-container {
+    width: 70px;
+    height: 70px;
+  }
+
+  .avatar-ring {
+    border: 3px solid rgba(0,123,255,0.3);
+    border-radius: 50%;
+    animation: rotate-ring 10s linear infinite;
+  }
+
+  @keyframes rotate-ring {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .admin-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.4s ease;
+  }
+
+  .admin-profile-link:hover .admin-avatar-img {
+    transform: scale(1.1);
+  }
+
+  /* .admin-status {
+    width: 18px;
+    height: 18px;
+    background: #28a745;
+    border: 3px solid rgba(30,41,59,0.95);
+    border-radius: 50%;
+    bottom: 2px;
+    right: 2px;
+  }
+
+  .status-ripple {
+    width: 100%;
+    height: 100%;
+    background: #28a745;
+    border-radius: 50%;
+    animation: ripple-status 2s infinite;
+  } */
+
+  @keyframes ripple-status {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+  }
+
+  .admin-name {
+    color: #ffffff !important;
+    font-size: 1.2rem;
+    font-weight: 700 !important;
+  }
+
+  .admin-name-glow {
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #007bff, #00d4ff);
+    transition: width 0.4s ease;
+  }
+
+  .admin-profile-link:hover .admin-name-glow {
+    width: 100%;
+  }
+
+  .admin-role {
+    color: rgba(255,255,255,0.7) !important;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+
+  .admin-badge {
+    color: #007bff !important;
+    font-size: 1.3rem;
+    position: absolute !important;
+    top: 1.5rem;
+    right: 1.5rem;
+    transition: all 0.4s ease;
+  }
+
+  .badge-pulse {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(0,123,255,0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse-badge 3s infinite;
+  }
+
+  @keyframes pulse-badge {
+    0%, 100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.7; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
+  }
+
+  /* Enhanced Dividers */
+  .enhanced-admin-divider {
+    height: 1px;
+    margin: 1.5rem 1.5rem;
+    position: relative;
+  }
+
+  .divider-gradient {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,123,255,0.5), transparent);
+  }
+
+  .divider-shine {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shine-divider 3s infinite;
+  }
+
+  @keyframes shine-divider {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+  }
+
+  /* Section Headers */
+  .admin-section-header {
+    margin: 1rem 1.5rem 0.5rem;
+  }
+
+  .admin-section-link {
+    padding: 1rem 1.5rem !important;
+    border-radius: 15px;
+    border: 1px solid rgba(0,123,255,0.2);
+    transition: all 0.4s ease;
+  }
+
+  .section-bg {
+    background: linear-gradient(135deg, rgba(0,123,255,0.1), rgba(102,126,234,0.1));
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .admin-section-link:hover .section-bg {
+    opacity: 1;
+  }
+
+  .admin-section-title {
+    color: #ffffff !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .admin-section-icon {
+    color: #007bff !important;
+    font-size: 1.2rem;
+    transition: transform 0.4s ease;
+  }
+
+  .admin-section-link:hover .admin-section-icon {
+    transform: scale(1.2) rotate(10deg);
+  }
+
+  .section-glow {
+    background: radial-gradient(ellipse at center, rgba(0,123,255,0.2) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .admin-section-link:hover .section-glow {
+    opacity: 1;
+  }
+
+  /* Enhanced Navigation Items */
+  .enhanced-admin-nav-item {
+    margin: 0.5rem 1.5rem;
+  }
+
+  .admin-nav-link {
+    padding: 1rem 1.5rem !important;
+    border-radius: 15px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    color: rgba(255,255,255,0.8) !important;
+    border: 1px solid transparent;
+  }
+
+  .nav-item-bg {
+    background: linear-gradient(135deg, rgba(0,123,255,0.1), rgba(255,255,255,0.05));
+    border-radius: 15px;
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+
+  .admin-nav-link:hover .nav-item-bg {
+    opacity: 1;
+  }
+
+  .admin-nav-link:hover {
+    color: #ffffff !important;
+    border-color: rgba(0,123,255,0.3);
+    transform: translateX(8px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,123,255,0.2);
+  }
+
+  .admin-nav-icon {
+    color: #007bff;
+    font-size: 1.2rem;
+    transition: all 0.4s ease;
+    min-width: 20px;
+  }
+
+  .admin-nav-link:hover .admin-nav-icon {
+    color: #ffffff;
+    transform: scale(1.2);
+  }
+
+  .admin-nav-title {
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  .nav-item-indicator {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 0%;
+    background: linear-gradient(180deg, #007bff, #00d4ff);
+    border-radius: 0 4px 4px 0;
+    transition: height 0.4s ease;
+  }
+
+  .admin-nav-link:hover .nav-item-indicator {
+    height: 70%;
+  }
+
+  .nav-item-glow {
+    background: radial-gradient(ellipse at center, rgba(0,123,255,0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .admin-nav-link:hover .nav-item-glow {
+    opacity: 1;
+  }
+
+  /* Custom Admin Arrow */
+  .admin-arrow {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.4s ease;
+  }
+
+  .admin-arrow-line {
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 1px;
+    transition: all 0.4s ease;
+  }
+
+  .admin-arrow-line-1 {
+    top: 5px;
+    right: 0;
+    transform: rotate(45deg);
+    transform-origin: right;
+  }
+
+  .admin-arrow-line-2 {
+    top: 8px;
+    right: 0;
+    transform: rotate(-45deg);
+    transform-origin: right;
+  }
+
+  .admin-arrow.expanded .admin-arrow-line-1 {
+    transform: rotate(-45deg);
+  }
+
+  .admin-arrow.expanded .admin-arrow-line-2 {
+    transform: rotate(45deg);
+  }
+
+  /* Enhanced Submenu */
+  .enhanced-admin-submenu {
+    background: rgba(0,0,0,0.3);
+    border-radius: 15px;
+    margin: 0.5rem 0 0 1rem;
+    padding: 1rem 0;
+    border-left: 4px solid rgba(0,123,255,0.4);
+    backdrop-filter: blur(10px);
+  }
+
+  .admin-submenu-item {
+    margin: 0.25rem 1rem;
+  }
+
+  .admin-submenu-link {
+    padding: 0.75rem 1rem !important;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+    color: rgba(255,255,255,0.7) !important;
+  }
+
+  .submenu-item-bg {
+    background: linear-gradient(135deg, rgba(0,123,255,0.08), rgba(255,255,255,0.03));
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .admin-submenu-link:hover .submenu-item-bg {
+    opacity: 1;
+  }
+
+  .admin-submenu-link:hover {
+    color: #ffffff !important;
+    transform: translateX(8px);
+  }
+
+  .admin-submenu-dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(0,123,255,0.6);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+  }
+
+  .admin-submenu-link:hover .admin-submenu-dot {
+    background: #00d4ff;
+    transform: scale(1.5);
+    box-shadow: 0 0 10px rgba(0,212,255,0.5);
+  }
+
+  .admin-submenu-title {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .submenu-indicator {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0%;
+    background: linear-gradient(180deg, #007bff, #00d4ff);
+    border-radius: 0 3px 3px 0;
+    transition: height 0.4s ease;
+  }
+
+  .admin-submenu-link:hover .submenu-indicator {
+    height: 80%;
+  }
+
+  /* Enhanced Main Panel */
+  .enhanced-main-panel {
+    background: rgba(255,255,255,0.02);
+    backdrop-filter: blur(5px);
+    border-radius: 25px 0 0 0;
+    border: 1px solid rgba(255,255,255,0.05);
+    overflow: hidden;
+  }
+
+  .main-panel-bg {
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(0,123,255,0.02) 100%);
+  }
+
+  .enhanced-content-wrapper {
+    background: rgba(255,255,255,0.98);
+    margin: 1.5rem;
+    border-radius: 20px;
+    min-height: calc(100vh - 200px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+  }
+
+  .content-glow {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0,123,255,0.3), transparent);
+  }
+
+  /* Enhanced Spinner */
+  .enhanced-spinner .spinner-content {
+    color: white;
+    padding: 2rem;
+  }
+
+  .spinner-logo {
+    font-size: 3rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+  }
+
+  .spinner-icon {
+    animation: bounce-spinner 2s infinite;
+  }
+
+  @keyframes bounce-spinner {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .spinner-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+  }
+
+  .spinner-progress {
+    width: 200px;
+    height: 4px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #007bff, #00d4ff);
+    border-radius: 2px;
+    animation: loading-progress 2s infinite;
+  }
+
+  @keyframes loading-progress {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  /* Enhanced Back to Top */
+  .enhanced-back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    z-index: 1000;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
+  }
+
+  .btn-bg {
+    background: linear-gradient(135deg, #007bff, #00d4ff);
+    border-radius: 50%;
+    transition: transform 0.4s ease;
+  }
+
+  .btn-icon {
+    color: white;
+    font-size: 1.2rem;
+    z-index: 2;
+    transition: transform 0.4s ease;
+  }
+
+  .enhanced-back-to-top:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 15px 35px rgba(0,123,255,0.4);
+  }
+
+  .enhanced-back-to-top:hover .btn-bg {
+    transform: scale(1.1);
+  }
+
+  .enhanced-back-to-top:hover .btn-icon {
+    transform: translateY(-2px);
+  }
+
+  .btn-ripple {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    transition: all 0.6s ease;
+  }
+
+  .enhanced-back-to-top:active .btn-ripple {
+    width: 120%;
+    height: 120%;
+  }
+
+  /* Scrollbar Styling */
+  .enhanced-admin-sidebar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .enhanced-admin-sidebar::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+  }
+
+  .enhanced-admin-sidebar::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #007bff, #00d4ff);
+    border-radius: 3px;
+  }
+
+  .enhanced-admin-sidebar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0056b3, #007bff);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 991px) {
+    .enhanced-admin-sidebar {
+      border-radius: 0;
+    }
+
+    .enhanced-main-panel {
+      border-radius: 0;
+    }
+
+    .enhanced-content-wrapper {
+      margin: 1rem;
+      border-radius: 15px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .enhanced-back-to-top {
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+    }
+
+    .btn-icon {
+      font-size: 1rem;
+    }
+
+    .enhanced-admin-profile {
+      margin: 1rem 0.5rem 1.5rem;
+    }
+
+    .admin-profile-link {
+      padding: 1rem !important;
+    }
+
+    .admin-avatar-container {
+      width: 60px;
+      height: 60px;
+    }
+
+    .admin-name {
+      font-size: 1rem;
+    }
+
+    .enhanced-admin-nav-item {
+      margin: 0.5rem 0.5rem;
+    }
+
+    .admin-nav-link {
+      padding: 0.75rem 1rem !important;
+    }
+
+    .admin-section-header {
+      margin: 1rem 0.5rem 0.5rem;
+    }
+
+    .enhanced-admin-divider {
+      margin: 1rem 0.5rem;
+    }
+  }
+
+  /* Performance Optimizations */
+  .admin-nav-link,
+  .admin-submenu-link,
+  .admin-profile-link,
+  .bg-particle {
+    will-change: transform;
+  }
+
+  /* Focus States for Accessibility */
+  .admin-nav-link:focus,
+  .admin-submenu-link:focus,
+  .admin-profile-link:focus,
+  .enhanced-back-to-top:focus {
+    outline: 2px solid rgba(0,123,255,0.7);
+    outline-offset: 2px;
+  }
+
+  /* Loading Animation for Menu Items */
+  .enhanced-admin-nav-item {
+    animation: slideInAdmin 0.6s ease-out;
+  }
+
+  .enhanced-admin-nav-item:nth-child(odd) {
+    animation-delay: 0.1s;
+  }
+
+  .enhanced-admin-nav-item:nth-child(even) {
+    animation-delay: 0.2s;
+  }
+
+  @keyframes slideInAdmin {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Smooth transitions for all interactive elements */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom selection color */
+  ::selection {
+    background: rgba(0,123,255,0.2);
+    color: inherit;
+  }
+
+  ::-moz-selection {
+    background: rgba(0,123,255,0.2);
+    color: inherit;
+  }
+
+  /* Hover effects for better UX */
+  .enhanced-admin-sidebar {
+    transition: box-shadow 0.3s ease;
+  }
+
+  .enhanced-admin-sidebar:hover {
+    box-shadow: 12px 0 40px rgba(0,0,0,0.4);
+  }
+
+  /* Active states for navigation */
+  .admin-nav-link.active,
+  .admin-submenu-link.active {
+    background: linear-gradient(135deg, rgba(0,123,255,0.2), rgba(102,126,234,0.1)) !important;
+    color: #ffffff !important;
+    border-color: rgba(0,123,255,0.5) !important;
+  }
+
+  .admin-nav-link.active .nav-item-indicator,
+  .admin-submenu-link.active .submenu-indicator {
+    height: 80% !important;
+    opacity: 1 !important;
+  }
+
+  .admin-nav-link.active .admin-nav-icon {
+    color: #ffffff !important;
+  }
+
+  /* Enhanced tooltip styles (if needed) */
+  .tooltip-admin {
+    position: absolute;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  /* Additional polish for the layout */
+  .container-scroller {
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Ensure proper stacking context */
+  .enhanced-body-wrapper {
+    z-index: 1;
+  }
+
+  .admin-background {
+    z-index: 0;
+  }
+
+  .enhanced-admin-sidebar {
+    z-index: 10;
+  }
+
+  .enhanced-main-panel {
+    z-index: 5;
+  }
+
+  /* Print styles */
+  @media print {
+    .enhanced-admin-sidebar,
+    .enhanced-back-to-top,
+    .admin-background {
+      display: none !important;
+    }
+
+    .enhanced-main-panel {
+      margin: 0 !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+  }
+</style>

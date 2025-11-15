@@ -18,7 +18,7 @@ import {Router} from '@angular/router';
 })
 export class AdminComponent implements OnInit {
   isShow: boolean = false;
-  canActivate: boolean = false;
+  canActivate: boolean = true;
   listMemberMenu: MenuGroup[] = [];
   listSystemMenu: MenuGroup[] = [];
   listMenuGroupBlank: number[] = [9];

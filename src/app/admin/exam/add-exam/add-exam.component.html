@@ -5,12 +5,12 @@
       <form class="forms-sample">
         <div class="form-group">
           <label for="examName">Exam Name</label>
-          <input type="text" class="form-control" [ngClass]="{'error-input-custom': showBorderError[0]}" id="examName"
+          <input type="text" class="form-control" name="examName" [ngClass]="{'error-input-custom': showBorderError[0]}" id="examName"
                  [(ngModel)]="param.examName" placeholder="Nhập tên đề thi">
         </div>
         <div class="form-group">
           <label for="examTopic">Topic</label>
-          <select class="form-control" id="examTopic" [(ngModel)]="param.topicId">
+          <select class="form-control" name="examTopic" id="examTopic" [(ngModel)]="param.topicId">
             <option value="">-- Select Topic --</option>
             @for (topic of listTopic; track topic) {
               <option [value]="topic?.topicId">{{ topic?.topicName }}</option>
