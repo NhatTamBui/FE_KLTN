@@ -25,10 +25,6 @@ const routes: Routes = [
       {path: 'slider', loadChildren: () => import('./slider/slider.module').then(m => m.SliderModule)},
       {path: 'transcript', loadChildren: () => import('./transcript/transcript.module').then(m => m.TranscriptModule)},
       {path: 'rev-ai', loadChildren: () => import('./rev-ai/rev-ai.module').then(m => m.RevAiModule)},
-      {
-        path: 'kommunicate',
-        loadChildren: () => import('./kommunicate/kommunicate.module').then(m => m.KommunicateModule)
-      },
       {path: 'crawl', loadChildren: () => import('./crawl-data/crawl.module').then(m => m.CrawlModule)},
       {path: 'tiny', loadChildren: () => import('./tiny/tiny.module').then(m => m.TinyModule)},
       {path: 'blog', loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule)},
