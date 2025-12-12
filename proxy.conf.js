@@ -14,7 +14,7 @@ const PROXY_CONFIG = [
     context: [
         "/api",
     ],
-    target: "http://3.0.93.123:8080",
+    target: "https://northern-chart-screensavers-name.trycloudflare.com",
     secure: false,
     "changeOrigin": true,
     "logLevel": "debug",
