@@ -14,7 +14,7 @@ const PROXY_CONFIG = [
     context: [
         "/api",
     ],
-    target: "https://3.0.93.123:8080",
+    target: "http://3.0.93.123:8080",
     secure: false,
     "changeOrigin": true,
     "logLevel": "debug",
