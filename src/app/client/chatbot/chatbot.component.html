@@ -12,8 +12,8 @@
         <h1 class="mb-1" (click)="test()">TOEIC MASTER</h1>
         <nz-select [(ngModel)]="selectedModel" nzPlaceHolder="Chọn chatbot" [ngClass]="{'d-none': !isChatbot}">
           <nz-option-group nzLabel="Miễn phí">
-            <nz-option [nzValue]="ModelAI.LLAMAS" nzLabel="LLAMAS"></nz-option>
-            <nz-option [nzValue]="ModelAI.PALM2" nzLabel="PALM2"></nz-option>
+            <nz-option [nzValue]="ModelAI.GEMINI" nzLabel="LLAMAS"></nz-option>
+            <nz-option [nzValue]="ModelAI.GEMINI" nzLabel="PALM2"></nz-option>
           </nz-option-group>
           <nz-option-group nzLabel="Thành viên">
             <nz-option [nzDisabled]="noAllowFullBot" [nzValue]="ModelAI.GEMINI" nzLabel="GEMINI"></nz-option>
