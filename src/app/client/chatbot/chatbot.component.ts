@@ -100,7 +100,7 @@ export class ChatbotComponent implements OnInit {
   }
 
   llamasChat() {
-    this.freeChat('api/llm/ask');
+    this.geminiChat();
   }
 
   payChat(url: string) {

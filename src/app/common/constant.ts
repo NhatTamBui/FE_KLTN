@@ -1,4 +1,4 @@
-export const BASE_URL_LOCAL = 'http://3.0.93.123:8080';
+export const BASE_URL_LOCAL = 'http://localhost:8080';
 export const BASE_URL = 'https://toeicute-v2-54835bc4a925.masterkuapp.com';
 
 export const CONSTANT = {

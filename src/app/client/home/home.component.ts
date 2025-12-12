@@ -1,3 +1,39 @@
+// import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
+// import {HttpClient} from '@angular/common/http';
+//
+// @Component({
+//   selector: 'app-home',
+//   templateUrl: './home.component.html',
+//   styleUrls: ['./home.component.css']
+// })
+// export class HomeComponent implements OnInit {
+//   constructor(private http: HttpClient, private renderer: Renderer2, private el: ElementRef) {
+//   }
+//
+//   // ngOnInit(): void {
+//   //   this.http.get('api/kommunicate/bot/get-bot-active')
+//   //     .subscribe({
+//   //       next: (res: any) => {
+//   //         this.loadKommunicateScript(res.data.script);
+//   //       },
+//   //       error: () => {
+//   //       }
+//   //     });
+//   // }
+//   //
+//   // loadKommunicateScript(scriptContent: string): void {
+//   //   // check if script already exists
+//   //   const scriptElement = document.getElementById('kommunicate-widget-iframe');
+//   //   if (scriptElement) {
+//   //     return;
+//   //   }
+//   //   const script = this.renderer.createElement('script');
+//   //   script.type = 'text/javascript';
+//   //   script.text = scriptContent;
+//   //   this.renderer.appendChild(this.el.nativeElement, script);
+//   // }
+//
+// }
 import {Component, OnInit ,OnDestroy} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
@@ -7,7 +43,7 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-   private kommunicateLoaded = false;
+  private kommunicateLoaded = false;
 
   constructor() {}
 
@@ -24,10 +60,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     (function (d, m) {
       var kommunicateSettings = {
-        appId: '13260c98e3e7f4b34528286ad2da6833b',
+        appId: '11d506f4dc67b18ae45d5d0cdea30861b',
         popupWidget: true,
         automaticChatOpenOnNavigation: true,
-        
+
       };
 
       var s = d.createElement('script');
