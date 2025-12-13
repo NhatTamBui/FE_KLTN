@@ -14,7 +14,7 @@ const PROXY_CONFIG = [
     context: [
         "/api",
     ],
-    target: "https://currency-raises-diet-contributions.trycloudflare.com",
+    target: "https://distributors-myself-hub-reverse.trycloudflare.com",
     secure: false,
     "changeOrigin": true,
     "logLevel": "debug",
