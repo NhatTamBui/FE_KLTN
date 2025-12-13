@@ -14,7 +14,7 @@ const PROXY_CONFIG = [
     context: [
         "/api",
     ],
-    target: "https://northern-chart-screensavers-name.trycloudflare.com",
+    target: "https://currency-raises-diet-contributions.trycloudflare.com",
     secure: false,
     "changeOrigin": true,
     "logLevel": "debug",
