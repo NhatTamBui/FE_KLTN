@@ -14,7 +14,7 @@ const PROXY_CONFIG = [
     context: [
         "/api",
     ],
-    target: "https://aims-mechanism-building-html.trycloudflare.com",
+    target: "https://stress-res-firefox-enclosed.trycloudflare.com",
     secure: false,
     "changeOrigin": true,
     "logLevel": "debug",
