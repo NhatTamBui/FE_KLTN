@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080'  // Dev: dùng proxy
+  apiUrl: 'https://aims-mechanism-building-html.trycloudflare.com'  // Dev: dùng proxy
 };

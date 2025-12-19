@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://distributors-myself-hub-reverse.trycloudflare.com'  // Production: EC2 URL
+  apiUrl: 'https://aims-mechanism-building-html.trycloudflare.com'  // Production: EC2 URL
 };

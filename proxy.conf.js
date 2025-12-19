@@ -14,7 +14,7 @@ const PROXY_CONFIG = [
     context: [
         "/api",
     ],
-    target: "https://distributors-myself-hub-reverse.trycloudflare.com",
+    target: "https://aims-mechanism-building-html.trycloudflare.com",
     secure: false,
     "changeOrigin": true,
     "logLevel": "debug",
